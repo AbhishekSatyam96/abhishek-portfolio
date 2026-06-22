@@ -25,6 +25,9 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const CLASH_DISPLAY_HREF =
+  "https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -82,12 +85,21 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
     >
       <head>
-        {/* Display typeface — Clash Display (Fontshare). swap keeps text painted
-            with the Space Grotesk fallback until it loads, avoiding invisible text. */}
+        {/* Display typeface — Clash Display (Fontshare). Loaded non-render-blocking
+            (media="print" → "all" on load) so first paint isn't gated on the CDN;
+            text shows in the self-hosted Space Grotesk fallback until Clash arrives. */}
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap"
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        <link rel="preload" as="style" href={CLASH_DISPLAY_HREF} />
+        <link rel="stylesheet" href={CLASH_DISPLAY_HREF} media="print" data-clash="" />
+        <noscript>
+          <link rel="stylesheet" href={CLASH_DISPLAY_HREF} />
+        </noscript>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var l=document.querySelector('link[data-clash]');if(l)l.addEventListener('load',function(){l.media='all'});})();",
+          }}
         />
         {/* No-JS / pre-hydration fallback: never leave scroll-revealed content hidden. */}
         <noscript>

@@ -13,12 +13,12 @@ export const staggerContainer = (stagger = 0.08, delay = 0): Variants => ({
 
 /** Fade-up with a slight blur-in — the signature entrance. */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
   show: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.7, ease: easeOutExpo },
+    transition: { duration: 0.6, ease: easeOutExpo },
   },
 };
 

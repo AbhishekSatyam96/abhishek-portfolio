@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { hero, site } from "@/content";
 import { Aurora } from "@/components/Aurora";
 import { LatticeField } from "@/components/LatticeField";
@@ -22,46 +22,46 @@ export function Hero() {
       <LatticeField className="opacity-70 [mask-image:radial-gradient(120%_90%_at_50%_30%,#000_55%,transparent_100%)]" />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-8">
-        <motion.div
-          variants={staggerContainer(0.12, 0.1)}
+        <m.div
+          variants={staggerContainer(0.08, 0.04)}
           initial="hidden"
           animate="show"
           className="max-w-4xl"
         >
-          <motion.p variants={item} className="reveal eyebrow">
+          <m.p variants={item} className="reveal eyebrow">
             {hero.eyebrow}
-          </motion.p>
+          </m.p>
 
-          <motion.h1
+          <m.h1
             variants={item}
             className="reveal mt-6 text-balance font-display text-[2.15rem] font-semibold leading-[0.98] tracking-tight text-fg sm:text-6xl md:text-7xl lg:text-8xl"
           >
             {site.name}
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             variants={item}
             className="reveal mt-5 text-lg font-medium text-fg/90 sm:text-xl"
           >
             {hero.roleLine}
-          </motion.p>
+          </m.p>
 
-          <motion.p
+          <m.p
             variants={item}
             className="reveal mt-3 font-display text-2xl font-medium tracking-tight text-muted sm:text-3xl"
           >
             {hero.statement[0]}{" "}
             <span className="text-gradient">{hero.statement[1]}</span>
-          </motion.p>
+          </m.p>
 
-          <motion.p
+          <m.p
             variants={item}
             className="reveal mt-7 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
           >
             {hero.intro}
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             variants={item}
             className="reveal mt-9 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
@@ -72,9 +72,9 @@ export function Hero() {
             <GhostButton href={hero.secondaryCta.href}>
               {hero.secondaryCta.label}
             </GhostButton>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             variants={item}
             className="reveal mt-8 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5"
           >
@@ -85,10 +85,10 @@ export function Hero() {
             <span className="font-mono text-xs text-muted">
               {site.availability} · {site.location}
             </span>
-          </motion.div>
+          </m.div>
 
           {/* Scannable proof points */}
-          <motion.dl
+          <m.dl
             variants={item}
             className="reveal mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/8 sm:grid-cols-3"
           >
@@ -105,8 +105,8 @@ export function Hero() {
                 </dd>
               </div>
             ))}
-          </motion.dl>
-        </motion.div>
+          </m.dl>
+        </m.div>
       </div>
 
       {/* Scroll cue */}

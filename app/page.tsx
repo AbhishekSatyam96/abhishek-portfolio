@@ -1,3 +1,4 @@
+import { MotionProvider } from "@/components/MotionProvider";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
@@ -9,7 +10,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <>
+    <MotionProvider>
       <Nav />
       <main id="main">
         <Hero />
@@ -20,6 +21,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionProvider>
   );
 }

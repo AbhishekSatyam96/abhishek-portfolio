@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { m, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 import { fadeStatic, fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
@@ -22,7 +22,7 @@ export function Reveal({ children, className, delay = 0, variants }: RevealProps
   const v = reduced ? fadeStatic : variants ?? fadeUp;
 
   return (
-    <motion.div
+    <m.div
       className={`reveal ${className ?? ""}`}
       variants={v}
       initial="hidden"
@@ -31,7 +31,7 @@ export function Reveal({ children, className, delay = 0, variants }: RevealProps
       transition={delay ? { delay } : undefined}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -48,7 +48,7 @@ export function Stagger({
   delay?: number;
 }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       variants={staggerContainer(stagger, delay)}
       initial="hidden"
@@ -56,7 +56,7 @@ export function Stagger({
       viewport={viewportOnce}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -73,8 +73,8 @@ export function StaggerItem({
   const reduced = useReducedMotion();
   const v = reduced ? fadeStatic : variants ?? fadeUp;
   return (
-    <motion.div className={`reveal ${className ?? ""}`} variants={v}>
+    <m.div className={`reveal ${className ?? ""}`} variants={v}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }
