@@ -2,6 +2,7 @@ import { experience } from "@/content";
 import { Section } from "@/components/Section";
 import { SectionHeading, Tag } from "@/components/primitives";
 import { Stagger, StaggerItem } from "@/components/Reveal";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 export function Experience() {
   return (
@@ -33,7 +34,10 @@ export function Experience() {
                 <span className="relative h-4 w-4 rounded-full border-2 border-bg bg-gradient-to-br from-primary to-accent" />
               </span>
 
-              <article className="group glass rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_12px_44px_-16px_rgba(124,140,255,0.45)] sm:p-6">
+              <SpotlightCard
+                as="article"
+                className="group glass rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_12px_44px_-16px_rgba(124,140,255,0.45)] sm:p-6"
+              >
                 <header className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                   <h3 className="text-lg font-semibold text-fg">
                     {role.title}
@@ -72,7 +76,7 @@ export function Experience() {
                     <Tag key={t}>{t}</Tag>
                   ))}
                 </div>
-              </article>
+              </SpotlightCard>
             </StaggerItem>
           ))}
         </Stagger>

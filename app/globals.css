@@ -139,6 +139,43 @@
     text-transform: uppercase;
     color: var(--color-accent);
   }
+
+  /* ---------------------------------------------------------------- *
+   *  Interactive cards — cursor spotlight + optional 3D tilt.
+   *  Pointer position arrives via --spot-x/--spot-y (and --rx/--ry for
+   *  tilt) set in SpotlightCard. z-index:0 contains the negative-z glow
+   *  so it sits over the card surface but under the content.
+   * ---------------------------------------------------------------- */
+  .spotlight {
+    position: relative;
+    z-index: 0;
+  }
+
+  .spotlight-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-expo);
+    background: radial-gradient(
+      280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      color-mix(in oklab, var(--color-primary) 22%, transparent),
+      transparent 62%
+    );
+  }
+
+  .spotlight:hover .spotlight-glow {
+    opacity: 1;
+  }
+
+  .tilt {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg))
+      rotateY(var(--ry, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 0.3s var(--ease-out-expo);
+  }
 }
 
 /* ------------------------------------------------------------------ *

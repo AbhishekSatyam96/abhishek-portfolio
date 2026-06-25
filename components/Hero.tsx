@@ -5,6 +5,8 @@ import { hero, site } from "@/content";
 import { Aurora } from "@/components/Aurora";
 import { LatticeField } from "@/components/LatticeField";
 import { GradientButton, GhostButton } from "@/components/GradientButton";
+import { Magnetic } from "@/components/Magnetic";
+import { CountUp } from "@/components/CountUp";
 import { fadeStatic, fadeUp, staggerContainer } from "@/lib/motion";
 
 export function Hero() {
@@ -65,13 +67,17 @@ export function Hero() {
             variants={item}
             className="reveal mt-9 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
-            <GradientButton href={hero.primaryCta.href} ariaLabel="View selected work">
-              {hero.primaryCta.label}
-              <span aria-hidden="true">→</span>
-            </GradientButton>
-            <GhostButton href={hero.secondaryCta.href}>
-              {hero.secondaryCta.label}
-            </GhostButton>
+            <Magnetic>
+              <GradientButton href={hero.primaryCta.href} ariaLabel="View selected work">
+                {hero.primaryCta.label}
+                <span aria-hidden="true">→</span>
+              </GradientButton>
+            </Magnetic>
+            <Magnetic>
+              <GhostButton href={hero.secondaryCta.href}>
+                {hero.secondaryCta.label}
+              </GhostButton>
+            </Magnetic>
           </m.div>
 
           <m.div
@@ -96,9 +102,10 @@ export function Hero() {
               <div key={s.label} className="bg-white/[0.02] p-5">
                 <dt className="sr-only">{s.label}</dt>
                 <dd>
-                  <span className="block font-display text-2xl font-semibold tracking-tight text-gradient sm:text-3xl">
-                    {s.value}
-                  </span>
+                  <CountUp
+                    value={s.value}
+                    className="block font-display text-2xl font-semibold tracking-tight text-gradient sm:text-3xl"
+                  />
                   <span className="mt-1 block text-xs leading-snug text-muted">
                     {s.label}
                   </span>

@@ -3,6 +3,7 @@ import { Section } from "@/components/Section";
 import { Aurora } from "@/components/Aurora";
 import { Reveal } from "@/components/Reveal";
 import { GradientButton } from "@/components/GradientButton";
+import { Magnetic } from "@/components/Magnetic";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
 export function Contact() {
@@ -25,14 +26,16 @@ export function Contact() {
             </p>
 
             <div className="mt-9 flex justify-center">
-              <GradientButton
-                href={`mailto:${contact.email}`}
-                ariaLabel={`Email ${site.name}`}
-                className="px-7 py-3.5 text-base"
-              >
-                <MailIcon className="h-5 w-5" />
-                {contact.email}
-              </GradientButton>
+              <Magnetic>
+                <GradientButton
+                  href={`mailto:${contact.email}`}
+                  ariaLabel={`Email ${site.name}`}
+                  className="px-7 py-3.5 text-base"
+                >
+                  <MailIcon className="h-5 w-5" />
+                  {contact.email}
+                </GradientButton>
+              </Magnetic>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

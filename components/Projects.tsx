@@ -4,6 +4,8 @@ import { SectionHeading, Tag } from "@/components/primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { RagVisual } from "@/components/RagVisual";
 import { GradientButton, GhostButton } from "@/components/GradientButton";
+import { Magnetic } from "@/components/Magnetic";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { ArrowUpRight, GithubIcon, LockIcon, SparkIcon } from "@/components/icons";
 
 const featured = projects.find((p) => p.kind === "featured")!;
@@ -72,15 +74,19 @@ export function Projects() {
                   <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                     {featured.links?.map((l) =>
                       l.primary ? (
-                        <GradientButton key={l.label} href={l.href} ariaLabel={`${featured.name} — ${l.label}`}>
-                          {l.label}
-                          <ArrowUpRight className="h-4 w-4" />
-                        </GradientButton>
+                        <Magnetic key={l.label}>
+                          <GradientButton href={l.href} ariaLabel={`${featured.name} — ${l.label}`}>
+                            {l.label}
+                            <ArrowUpRight className="h-4 w-4" />
+                          </GradientButton>
+                        </Magnetic>
                       ) : (
-                        <GhostButton key={l.label} href={l.href} ariaLabel={`${featured.name} — ${l.label}`}>
-                          <GithubIcon className="h-4 w-4" />
-                          {l.label}
-                        </GhostButton>
+                        <Magnetic key={l.label}>
+                          <GhostButton href={l.href} ariaLabel={`${featured.name} — ${l.label}`}>
+                            <GithubIcon className="h-4 w-4" />
+                            {l.label}
+                          </GhostButton>
+                        </Magnetic>
                       ),
                     )}
                   </div>
@@ -105,8 +111,12 @@ export function Projects() {
 
       <Stagger className="mt-5 grid gap-6 sm:grid-cols-2" stagger={0.1}>
         {privateProjects.map((p) => (
-          <StaggerItem key={p.name}>
-            <article className="group glass relative flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_14px_46px_-18px_rgba(124,140,255,0.4)]">
+          <StaggerItem key={p.name} className="h-full">
+            <SpotlightCard
+              as="article"
+              tilt
+              className="group glass relative flex h-full flex-col rounded-2xl p-6 transition-[border-color,box-shadow] duration-300 hover:border-white/15 hover:shadow-[0_14px_46px_-18px_rgba(124,140,255,0.4)]"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-display text-xl font-semibold tracking-tight text-fg">
@@ -143,7 +153,7 @@ export function Projects() {
               <p className="mt-5 border-t border-white/8 pt-4 font-mono text-xs text-muted">
                 Architecture &amp; live links withheld under NDA — happy to walk through it in a call.
               </p>
-            </article>
+            </SpotlightCard>
           </StaggerItem>
         ))}
       </Stagger>

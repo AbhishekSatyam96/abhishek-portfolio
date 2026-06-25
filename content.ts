@@ -116,7 +116,7 @@ export const experience: Role[] = [
       "Established code-review and unit-test standards (75%+ coverage) and integrated automated regression testing into CI, reducing recurring production defects and improving release reliability.",
       "Mentor engineers through structured code reviews and pair programming, and partner with backend, product, and QA teams to ship reliable releases monitored via Sentry.",
     ],
-    tags: ["React", "Next.js", "TypeScript", "Docker", "GitLab CI/CD", "GCP", "Sentry"],
+    tags: ["Next.js", "React", "Node.js", "TypeScript", "Docker", "GitLab CI/CD", "GCP", "Sentry"],
   },
   {
     company: "AntWalk",
@@ -131,7 +131,7 @@ export const experience: Role[] = [
       "Increased unit-test coverage from 22% to 72% (Jest, React Testing Library) and ran 500+ code reviews, establishing engineering standards adopted across the team.",
       "Built feature-flag (LaunchDarkly, Split) and A/B-testing frameworks across 8+ experiments, enabling data-driven product decisions.",
     ],
-    tags: ["React", "Next.js", "TypeScript", "Node.js", "OpenAPI", "LaunchDarkly", "Jest"],
+    tags: ["React", "Next.js", "TypeScript", "OpenAPI", "LaunchDarkly", "Jest"],
   },
   {
     company: "AntWalk",
@@ -153,6 +153,16 @@ export const experience: Role[] = [
       "Built and maintained frontend modules for an enterprise web app used by 5K+ internal users, ensuring cross-browser compatibility and contributing to a ~15% reduction in UI-related defects.",
     ],
     tags: ["JavaScript", "Frontend", "Cross-browser"],
+  },
+  {
+    company: "Cognizant",
+    title: "Intern",
+    period: "Janary 2019 – June 2019",
+    context: "Enterprise web · 5K+ users",
+    bullets: [
+      "Built and maintained frontend modules for an enterprise web app used by 5K+ internal users, ensuring cross-browser compatibility and contributing to a ~15% reduction in UI-related defects.",
+    ],
+    tags: ["JavaScript", "HTML", "CSS"],
   },
 ];
 

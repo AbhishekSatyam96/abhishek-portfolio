@@ -91,7 +91,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
         <link rel="preload" as="style" href={CLASH_DISPLAY_HREF} />
-        <link rel="stylesheet" href={CLASH_DISPLAY_HREF} media="print" data-clash="" />
+        {/* media flips "print" → "all" on load (see script below); that swap can
+            land before hydration, so the attribute mismatch is expected. */}
+        <link
+          rel="stylesheet"
+          href={CLASH_DISPLAY_HREF}
+          media="print"
+          data-clash=""
+          suppressHydrationWarning
+        />
         <noscript>
           <link rel="stylesheet" href={CLASH_DISPLAY_HREF} />
         </noscript>
