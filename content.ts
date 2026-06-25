@@ -224,31 +224,42 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Frameworks & Libraries",
-    items: ["React.js", "Next.js", "Redux", "Redux Toolkit", "React Native"],
+    items: ["React.js", "Next.js", "React Native"],
+  },
+  {
+    label: "State Management",
+    items: ["Redux Toolkit", "Redux",  "React Context", "Valtio"],
+  },
+  {
+    label: "UI & Styling",
+    items: [
+      "Tailwind CSS",
+      "Styled Components",
+      "Ant Design",
+      "HTML5 Canvas",
+      "Responsive Design",
+      "Web Accessibility (WCAG)",
+    ],
   },
   {
     label: "Architecture",
     items: [
-      "System Design",
-      "Micro-Frontends",
       "Component Architecture",
+      "Micro-Frontends",
       "SSR/SSG/ISR",
       "Caching Strategies",
-      "Critical CSS",
-      "Lazy Loading",
+      "System Design",
     ],
   },
   {
     label: "Backend & APIs",
-    // The MERN phrasing below is intentional and must stay exact.
-    note: "Backend development across the MERN stack (Node.js, Express, MongoDB).",
     items: [
       "Node.js",
       "Express.js",
       "REST APIs",
       "GraphQL (Apollo Client)",
-      "Contract-Driven Integration",
       "OpenAPI",
+      "Contract-Driven Integration",
     ],
   },
   {
@@ -256,37 +267,56 @@ export const skills: SkillGroup[] = [
     items: ["MongoDB"],
   },
   {
-    label: "DevOps & Cloud",
-    items: ["Docker", "GitLab CI/CD", "CircleCI", "GCP", "Git", "SonarQube", "SAST"],
-  },
-  {
-    label: "Testing",
-    items: ["Jest", "React Testing Library", "TDD", "Integration Testing"],
-  },
-  {
     label: "Performance & Monitoring",
-    items: ["Core Web Vitals (LCP, CLS, INP)", "Lighthouse", "PageSpeed Insights", "Sentry"],
-  },
-  {
-    label: "UI & Styling",
     items: [
-      "Tailwind CSS",
-      "Styled Components",
-      "HTML5 Canvas",
-      "Responsive Design",
-      "Web Accessibility (WCAG)",
+      "Core Web Vitals (LCP, CLS, INP)",
+      "Lighthouse",
+      "PageSpeed Insights",
+      "Critical CSS",
+      "Lazy Loading",
+      "Sentry",
     ],
   },
   {
-    label: "State Management",
-    items: ["Redux Toolkit", "React Context", "React Hooks", "Valtio"],
+    label: "Testing",
+    items: [
+      "Jest",
+      "React Testing Library",
+      "Integration Testing",
+      "TDD",
+    ],
   },
   {
-    label: "Other",
-    items: ["Feature Flags (LaunchDarkly, Split)", "Agile/Scrum"],
+    label: "DevOps, Cloud & Tooling",
+    items: [
+      "Git",
+      "Docker",
+      "GitLab CI/CD",
+      "CircleCI",
+      "GCP",
+      "SonarQube",
+      "SAST",
+    ],
   },
+  {
+    label: "Engineering Practices",
+    items: [
+      "Agile/Scrum",
+      "Feature Flags (LaunchDarkly, Split)",
+    ],
+  },
+  {
+  label: "Build Tools",
+  items: [
+    "Webpack",
+    "Vite",
+    "Babel",
+    "npm",
+    "Yarn",
+    "pnpm",
+  ],
+}
 ];
-
 export const education = {
   degree: "B.Tech, Computer Science & Engineering",
   school: "Lovely Professional University, Phagwara, Punjab",
