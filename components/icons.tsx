@@ -1,4 +1,4 @@
-/** Inline icon set — currentColor, 1.6 stroke, aria-hidden by default. */
+/** Inline1 icon set — currentColor, 1.6 stroke, aria-hidden by default. */
 type IconProps = { className?: string };
 
 const base = "h-4 w-4";
