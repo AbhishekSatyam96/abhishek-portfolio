@@ -2,9 +2,9 @@ import { contact, site } from "@/content";
 import { Section } from "@/components/Section";
 import { Aurora } from "@/components/Aurora";
 import { Reveal } from "@/components/Reveal";
-import { GradientButton } from "@/components/GradientButton";
+import { GradientButton, GhostButton } from "@/components/GradientButton";
 import { Magnetic } from "@/components/Magnetic";
-import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon, MailIcon, PhoneIcon } from "@/components/icons";
 
 export function Contact() {
   return (
@@ -25,7 +25,7 @@ export function Contact() {
               {contact.body}
             </p>
 
-            <div className="mt-9 flex justify-center">
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
               <Magnetic>
                 <GradientButton
                   href={`mailto:${contact.email}`}
@@ -35,6 +35,16 @@ export function Contact() {
                   <MailIcon className="h-5 w-5" />
                   {contact.email}
                 </GradientButton>
+              </Magnetic>
+              <Magnetic>
+                <GhostButton
+                  href={`tel:${contact.phone.replace(/\s+/g, "")}`}
+                  ariaLabel={`Call ${site.name}`}
+                  className="px-7 py-3.5 text-base"
+                >
+                  <PhoneIcon className="h-5 w-5" />
+                  {contact.phone}
+                </GhostButton>
               </Magnetic>
             </div>
 

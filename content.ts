@@ -51,8 +51,8 @@ export const site = {
   email: "abhishek.satyam96@gmail.com",
   phone: "+91 9915121582",
   // Live links
-  linkedin: "https://linkedin.com/in/abhishek-satyam",
-  github: "https://github.com/", // TODO: add GitHub profile URL
+  linkedin: "https://www.linkedin.com/in/abhishek-satyam/",
+  github: "https://github.com/AbhishekSatyam96",
   resumeUrl: "/Abhishek-Satyam-Resume.pdf", // TODO: add résumé PDF to /public and confirm filename
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.dev", // TODO: set custom domain
@@ -333,6 +333,7 @@ export const contact = {
   title: "Let's build something worth trusting.",
   body: "I'm open to Senior / Lead frontend and full-stack roles at strong product companies. The fastest way to reach me is email.",
   email: site.email,
+  phone: site.phone,
 };
 
 export const footer = {
