@@ -72,7 +72,7 @@ export const hero = {
   eyebrow: "// senior software engineer · post-quantum cryptography",
   roleLine: "Senior Software Engineer · Full-Stack (Frontend-Heavy)",
   // Oversized gradient statement under the name.
-  statement: ["Engineering at the", "edge of trust."],
+  statement: ["Building software that scales from", "pixels to production."],
   // Short, scannable intro for the hero.
   intro:
     "Frontend-heavy full-stack engineer with 7 years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs.",

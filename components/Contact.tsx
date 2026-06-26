@@ -58,7 +58,7 @@ export function Contact() {
                 <LinkedinIcon className="h-4 w-4" />
                 LinkedIn
               </a>
-              <a
+              {/* <a
                 href={site.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -66,7 +66,7 @@ export function Contact() {
               >
                 <GithubIcon className="h-4 w-4" />
                 GitHub
-              </a>
+              </a> */}
               <a
                 href={site.resumeUrl}
                 target="_blank"
