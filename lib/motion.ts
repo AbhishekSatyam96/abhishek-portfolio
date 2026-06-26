@@ -40,3 +40,10 @@ export const fadeStatic: Variants = {
 
 /** whileInView viewport config used across sections. */
 export const viewportOnce = { once: true, amount: 0.25 } as const;
+
+/**
+ * Viewport config for stagger containers. These can be taller than the screen
+ * (e.g. a single-column list on mobile), where a fractional `amount` may exceed
+ * the viewport height and never trigger — so fire as soon as any part enters.
+ */
+export const viewportStagger = { once: true, amount: "some" } as const;

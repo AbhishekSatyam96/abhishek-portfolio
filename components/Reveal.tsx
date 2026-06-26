@@ -2,7 +2,7 @@
 
 import { m, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
-import { fadeStatic, fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { fadeStatic, fadeUp, staggerContainer, viewportOnce, viewportStagger } from "@/lib/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -53,7 +53,11 @@ export function Stagger({
       variants={staggerContainer(stagger, delay)}
       initial="hidden"
       whileInView="show"
-      viewport={viewportOnce}
+      // A stagger container can be far taller than the viewport (e.g. a tall
+      // single-column list on mobile). A fractional `amount` would then require
+      // more pixels than a phone screen has, so it would never fire and the
+      // children would stay hidden. Trigger as soon as any part scrolls in.
+      viewport={viewportStagger}
     >
       {children}
     </m.div>
