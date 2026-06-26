@@ -108,6 +108,8 @@ export function Nav() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={site.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-fg transition-colors hover:border-white/20 hover:bg-white/[0.06]"
           >
             Résumé
@@ -172,6 +174,8 @@ export function Nav() {
           <li className="mt-1 flex gap-2 px-1 pt-2">
             <a
               href={site.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="flex-1 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2.5 text-center text-sm text-fg"
             >

@@ -69,6 +69,8 @@ export function Contact() {
               </a>
               <a
                 href={site.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-muted transition-colors hover:border-white/20 hover:text-fg"
               >
                 Résumé

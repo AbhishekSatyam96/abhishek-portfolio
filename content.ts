@@ -53,7 +53,7 @@ export const site = {
   // Live links
   linkedin: "https://www.linkedin.com/in/abhishek-satyam/",
   github: "https://github.com/AbhishekSatyam96",
-  resumeUrl: "/Abhishek-Satyam-Resume.pdf", // TODO: add résumé PDF to /public and confirm filename
+  resumeUrl: "https://drive.google.com/file/d/1mj6_6M-f4k8NmYq2NZ6el6pZlBvHIHoh/view?usp=sharing",
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.dev", // TODO: set custom domain
   description:
@@ -63,7 +63,7 @@ export const site = {
 export const nav: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
+  // { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
@@ -124,8 +124,8 @@ export const experience: Role[] = [
     period: "July 2020 – March 2025",
     context: "Enterprise SaaS · 50+ clients",
     bullets: [
-      "Led a 6-engineer team building the core SaaS platform for 50+ enterprise clients, owning system design, implementation, testing, and deployment across 12+ major releases.",
       "Architected a library of 40+ reusable React, Next.js, and TypeScript components, cutting feature-development time ~35% and ensuring design consistency across the product.",
+      "Led a 6-engineer team building the core SaaS platform for 50+ enterprise clients, owning system design, implementation, testing, and deployment across 12+ major releases.",
       "Defined and integrated API contracts for 20+ endpoints with backend teams, reducing integration bugs ~25% through contract-driven development and shared OpenAPI documentation.",
       "Optimized performance via lazy loading, critical CSS extraction, and WebP/AVIF image optimization, reducing average page load time ~40% and improving Lighthouse score from 62 to 88.",
       "Increased unit-test coverage from 22% to 72% (Jest, React Testing Library) and ran 500+ code reviews, establishing engineering standards adopted across the team.",
@@ -158,11 +158,11 @@ export const experience: Role[] = [
     company: "Cognizant",
     title: "Intern",
     period: "Janary 2019 – June 2019",
-    context: "Enterprise web · 5K+ users",
+    context: "Internal Project",
     bullets: [
-      "Built and maintained frontend modules for an enterprise web app used by 5K+ internal users, ensuring cross-browser compatibility and contributing to a ~15% reduction in UI-related defects.",
+      "Completed Advanced Java training (JSP, Servlets, Spring MVC, Hibernate) and built a Spring MVC web application. Contributed to an ECM project using FileNet under Cognizant Digital Business",
     ],
-    tags: ["JavaScript", "HTML", "CSS"],
+    tags: ["Spring Boot", "HTML", "CSS"],
   },
 ];
 
@@ -220,15 +220,29 @@ export const projects: Project[] = [
 export const skills: SkillGroup[] = [
   {
     label: "Languages",
-    items: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+    items: [
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+    ],
   },
   {
     label: "Frameworks & Libraries",
-    items: ["React.js", "Next.js", "React Native"],
+    items: [
+      "React.js",
+      "Next.js",
+      "React Native",
+    ],
   },
   {
     label: "State Management",
-    items: ["Redux Toolkit", "Redux",  "React Context", "Valtio"],
+    items: [
+      "Redux Toolkit",
+      "Redux",
+      "React Context",
+      "Valtio",
+    ],
   },
   {
     label: "UI & Styling",
@@ -244,11 +258,11 @@ export const skills: SkillGroup[] = [
   {
     label: "Architecture",
     items: [
+      "System Design",
       "Component Architecture",
       "Micro-Frontends",
       "SSR/SSG/ISR",
       "Caching Strategies",
-      "System Design",
     ],
   },
   {
@@ -257,14 +271,18 @@ export const skills: SkillGroup[] = [
       "Node.js",
       "Express.js",
       "REST APIs",
-      "GraphQL (Apollo Client)",
+      "GraphQL",
+      "Apollo Client",
       "OpenAPI",
       "Contract-Driven Integration",
     ],
   },
   {
     label: "Databases",
-    items: ["MongoDB"],
+    items: [
+      "MongoDB",
+      "Mongoose"
+    ],
   },
   {
     label: "Performance & Monitoring",
@@ -274,6 +292,7 @@ export const skills: SkillGroup[] = [
       "PageSpeed Insights",
       "Critical CSS",
       "Lazy Loading",
+      "Image Optimization (WebP, AVIF)",
       "Sentry",
     ],
   },
@@ -287,14 +306,33 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
-    label: "DevOps, Cloud & Tooling",
+    label: "DevOps & Cloud",
     items: [
-      "Git",
       "Docker",
       "GitLab CI/CD",
       "CircleCI",
       "GCP",
+    ],
+  },
+  {
+    label: "Build Tools",
+    items: [
+      "Webpack",
+      "Vite",
+      "Babel",
+      "npm",
+      "Yarn",
+      "pnpm",
+    ],
+  },
+  {
+    label: "Developer Tooling",
+    items: [
+      "Git",
+      "ESLint",
       "SonarQube",
+      "Postman",
+      "Jira",
       "SAST",
     ],
   },
@@ -302,21 +340,14 @@ export const skills: SkillGroup[] = [
     label: "Engineering Practices",
     items: [
       "Agile/Scrum",
+      "Code Reviews",
+      "Pair Programming",
       "Feature Flags (LaunchDarkly, Split)",
+      "A/B Testing",
     ],
   },
-  {
-  label: "Build Tools",
-  items: [
-    "Webpack",
-    "Vite",
-    "Babel",
-    "npm",
-    "Yarn",
-    "pnpm",
-  ],
-}
 ];
+
 export const education = {
   degree: "B.Tech, Computer Science & Engineering",
   school: "Lovely Professional University, Phagwara, Punjab",
@@ -337,5 +368,5 @@ export const contact = {
 };
 
 export const footer = {
-  built: "Built with Next.js · deployed on GCP",
+  built: "",
 };
