@@ -1,6 +1,6 @@
 import { footer, site } from "@/content";
 import { BrandMark } from "@/components/BrandMark";
-import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import { ArrowUpIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
 export function Footer() {
   return (
@@ -10,7 +10,9 @@ export function Footer() {
           <BrandMark className="h-6 w-6" />
           <div>
             <p className="text-sm font-medium text-fg">{site.name}</p>
-            <p className="font-mono text-xs text-muted">{footer.built}</p>
+            {footer.built && (
+              <p className="font-mono text-xs text-muted">{footer.built}</p>
+            )}
           </div>
         </div>
 
@@ -39,6 +41,13 @@ export function Footer() {
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-muted transition-colors hover:border-white/20 hover:text-fg"
           >
             <GithubIcon className="h-4 w-4" />
+          </a>
+          <a
+            href="#top"
+            aria-label="Back to top"
+            className="ml-2 flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-gradient-to-br from-primary/15 to-accent/15 text-fg transition-all hover:border-white/25 hover:from-primary/30 hover:to-accent/30"
+          >
+            <ArrowUpIcon className="h-4 w-4" />
           </a>
         </div>
       </div>

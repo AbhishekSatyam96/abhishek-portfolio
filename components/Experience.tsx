@@ -1,12 +1,40 @@
 import { experience } from "@/content";
 import { Section } from "@/components/Section";
 import { SectionHeading, Tag } from "@/components/primitives";
+import { Aurora } from "@/components/Aurora";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
+
+/*
+ * Metric tokens — numbers with an optional %, s, or + suffix, including
+ * "3.8s to 1.9s" / "22% → 72%" ranges. The single capture group makes
+ * String.split return matches at odd indices.
+ */
+const METRIC =
+  /(\d[\d.,]*(?:%\+?|s\b|\+)?(?:\s*(?:→|to)\s*\d[\d.,]*(?:%\+?|s\b|\+)?)?)/g;
+
+/** Renders a bullet with its metrics emphasized; the copy stays verbatim. */
+function MetricText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(METRIC).map((part, i) =>
+        i % 2 ? (
+          <strong key={i} className="font-semibold text-fg/95">
+            {part}
+          </strong>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
 
 export function Experience() {
   return (
     <Section id="experience" labelledBy="experience-title" className="bg-elevated/30">
+      <Aurora variant="section" className="opacity-40" />
+
       <SectionHeading
         id="experience-title"
         eyebrow="// experience"
@@ -66,7 +94,9 @@ export function Experience() {
                         aria-hidden="true"
                         className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/70"
                       />
-                      <span>{b}</span>
+                      <span>
+                        <MetricText text={b} />
+                      </span>
                     </li>
                   ))}
                 </ul>

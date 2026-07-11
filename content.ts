@@ -76,7 +76,8 @@ export const hero = {
   // Short, scannable intro for the hero.
   intro:
     "Frontend-heavy full-stack engineer with 7 years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs.",
-  primaryCta: { label: "View work", href: "#projects" },
+  // Projects section is currently hidden, so the primary CTA lands on Experience.
+  primaryCta: { label: "View work", href: "#experience" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   stats: [
     { value: "7 yrs", label: "shipping production web apps" },
@@ -157,7 +158,7 @@ export const experience: Role[] = [
   {
     company: "Cognizant",
     title: "Intern",
-    period: "Janary 2019 – June 2019",
+    period: "January 2019 – June 2019",
     context: "Internal Project",
     bullets: [
       "Completed Advanced Java training (JSP, Servlets, Spring MVC, Hibernate) and built a Spring MVC web application. Contributed to an ECM project using FileNet under Cognizant Digital Business",
@@ -214,6 +215,45 @@ export const projects: Project[] = [
     ],
     stack: ["Next.js", "TypeScript", "Node.js", "Docker", "GitLab CI/CD", "Sentry"],
     badge: "Enterprise · private",
+  },
+];
+
+/** Headline technologies shown in the Skills marquee strip. */
+export const coreStack = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "GraphQL",
+  "Tailwind CSS",
+  "Docker",
+  "GitLab CI/CD",
+  "GCP",
+  "MongoDB",
+  "Jest",
+];
+
+/**
+ * Presentation grouping for the Skills section: each domain collects skill
+ * groups (by label) into one card so the section reads as four disciplines
+ * instead of a flat wall of thirteen cards.
+ */
+export const skillDomains: { label: string; groups: string[] }[] = [
+  {
+    label: "Frontend",
+    groups: ["Languages", "Frameworks & Libraries", "State Management", "UI & Styling"],
+  },
+  {
+    label: "Architecture & Backend",
+    groups: ["Architecture", "Backend & APIs", "Databases"],
+  },
+  {
+    label: "Quality & Performance",
+    groups: ["Performance & Monitoring", "Testing"],
+  },
+  {
+    label: "Delivery & Practices",
+    groups: ["DevOps & Cloud", "Build Tools", "Developer Tooling", "Engineering Practices"],
   },
 ];
 
@@ -309,9 +349,11 @@ export const skills: SkillGroup[] = [
     label: "DevOps & Cloud",
     items: [
       "Docker",
+      "Nginx",
       "GitLab CI/CD",
       "CircleCI",
       "GCP",
+      "AWS",
     ],
   },
   {
@@ -340,8 +382,6 @@ export const skills: SkillGroup[] = [
     label: "Engineering Practices",
     items: [
       "Agile/Scrum",
-      "Code Reviews",
-      "Pair Programming",
       "Feature Flags (LaunchDarkly, Split)",
       "A/B Testing",
     ],
@@ -362,7 +402,7 @@ export const achievements = [
 export const contact = {
   eyebrow: "// contact",
   title: "Let's build something worth trusting.",
-  body: "I'm open to Senior / Lead frontend and full-stack roles at strong product companies. The fastest way to reach me is email.",
+  body: "I'm open to Senior / Lead frontend and full-stack roles at strong product companies.",
   email: site.email,
   phone: site.phone,
 };

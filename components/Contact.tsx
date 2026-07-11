@@ -4,13 +4,14 @@ import { Aurora } from "@/components/Aurora";
 import { Reveal } from "@/components/Reveal";
 import { GradientButton, GhostButton } from "@/components/GradientButton";
 import { Magnetic } from "@/components/Magnetic";
+import { CopyEmail } from "@/components/CopyEmail";
 import { GithubIcon, LinkedinIcon, MailIcon, PhoneIcon } from "@/components/icons";
 
 export function Contact() {
   return (
     <Section id="contact" labelledBy="contact-title">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-elevated/40 px-6 py-16 text-center sm:px-12 sm:py-20">
+        <div className="gradient-border relative overflow-hidden rounded-3xl bg-elevated/40 px-6 py-16 text-center sm:px-12 sm:py-20">
           <Aurora variant="section" className="opacity-90" />
 
           <div className="relative mx-auto max-w-2xl">
@@ -49,6 +50,7 @@ export function Contact() {
             </div>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <CopyEmail email={contact.email} />
               <a
                 href={site.linkedin}
                 target="_blank"

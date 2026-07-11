@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { site } from "@/content";
+import { coreStack, education, experience, site } from "@/content";
 import { GrainOverlay } from "@/components/GrainOverlay";
 
 // Body. Variable font, self-hosted, no layout shift.
@@ -76,6 +76,31 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+// schema.org Person — lets search engines render a rich profile result.
+// Derived from content.ts so it can never drift from the visible copy.
+const currentRole = experience.find((r) => r.current);
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  description: site.description,
+  email: `mailto:${site.email}`,
+  telephone: site.phone,
+  url: site.url,
+  sameAs: [site.linkedin, site.github],
+  ...(currentRole && {
+    worksFor: { "@type": "Organization", name: currentRole.company },
+  }),
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bengaluru",
+    addressCountry: "IN",
+  },
+  knowsAbout: coreStack,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -120,6 +145,10 @@ export default function RootLayout({
         </noscript>
       </head>
       <body className="min-h-dvh bg-bg text-fg antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-elevated focus:px-4 focus:py-2 focus:text-sm focus:text-fg focus:ring-2 focus:ring-primary"
