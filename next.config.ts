@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       // Serve the resume PDF at the clean /resume URL.
-      { source: "/resume", destination: "/resume.pdf", permanent: false, },
+      { source: "/resume", destination: "/resume.pdf" },
     ];
   },
 };
