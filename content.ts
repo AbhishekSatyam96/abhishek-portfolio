@@ -37,6 +37,8 @@ export type Project = {
   /** Private (NDA) cards render a lock + "Enterprise · private" and no links. */
   badge?: string;
   links?: { label: string; href: string; primary?: boolean }[];
+  /** Featured cards render this as the right-column PipelineVisual diagram. */
+  pipeline?: { title: string; steps: { label: string; tech: string }[] };
 };
 
 /* ------------------------------------------------------------------ */
@@ -53,7 +55,8 @@ export const site = {
   // Live links
   linkedin: "https://www.linkedin.com/in/abhishek-satyam/",
   github: "https://github.com/AbhishekSatyam96",
-  resumeUrl: "https://drive.google.com/file/d/1mj6_6M-f4k8NmYq2NZ6el6pZlBvHIHoh/view?usp=sharing",
+  resumeUrl:
+    "https://drive.google.com/file/d/1mj6_6M-f4k8NmYq2NZ6el6pZlBvHIHoh/view?usp=sharing",
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.dev", // TODO: set custom domain
   description:
@@ -63,7 +66,7 @@ export const site = {
 export const nav: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  // { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
@@ -117,7 +120,16 @@ export const experience: Role[] = [
       "Established code-review and unit-test standards (75%+ coverage) and integrated automated regression testing into CI, reducing recurring production defects and improving release reliability.",
       "Mentor engineers through structured code reviews and pair programming, and partner with backend, product, and QA teams to ship reliable releases monitored via Sentry.",
     ],
-    tags: ["Next.js", "React", "Node.js", "TypeScript", "Docker", "GitLab CI/CD", "GCP", "Sentry"],
+    tags: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "TypeScript",
+      "Docker",
+      "GitLab CI/CD",
+      "GCP",
+      "Sentry",
+    ],
   },
   {
     company: "AntWalk",
@@ -171,20 +183,101 @@ export const projects: Project[] = [
   {
     name: "RAG Knowledge Assistant",
     kind: "featured",
-    tagline: "Deployed full-stack · open source",
+    tagline: "Postgres + pgvector · streaming · open source",
     description:
-      "A deployed full-stack app that answers questions over your own documents. LangChain.js runs retrieval-augmented generation over a vector store, a Node/Express API orchestrates retrieval and persists conversations in MongoDB, and a React frontend streams answers with their sources.",
-    role: "Full-stack — frontend, API, retrieval pipeline & deploy",
+      "A full-stack app that answers questions over your own documents. An Express + TypeScript API " +
+      "handles ingestion (dedupe → chunk → embed) and retrieval, Postgres with pgvector serves " +
+      "approximate-nearest-neighbour search over an HNSW index scoped per tenant, and a Next.js " +
+      "frontend streams grounded answers with inline, clickable citations — or a refusal when the " +
+      "corpus can't support an answer.",
+    role: "Full-stack — API, data model, retrieval pipeline & frontend",
     impact: [
-      "RAG pipeline over a vector store with source-cited answers",
-      "Node/Express API with MongoDB persistence and streaming responses",
-      "Deployed and live — the clickable proof of the full-stack claim",
+      "Vector search on Postgres/pgvector: HNSW index, cosine distance, per-request tuning inside a transaction",
+      "Multi-tenant isolation enforced in raw SQL, where the ORM's type safety doesn't reach",
+      "Token streaming over NDJSON with citations sent ahead of the first token",
+      "Ingestion pipeline with SHA-256 dedupe, batched embeddings, and a PENDING→READY state machine",
     ],
-    stack: ["React", "Node.js", "Express", "MongoDB", "LangChain.js", "Vector store", "TypeScript"],
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "React 19",
+      "Express 5",
+      "PostgreSQL",
+      "pgvector",
+      "Prisma",
+      "OpenAI",
+    ],
     links: [
-      { label: "Live demo", href: "#", primary: true }, // TODO: add deployed demo URL
-      { label: "Source", href: "#" }, // TODO: add GitHub repository URL
+      {
+        label: "Source",
+        href: "https://github.com/AbhishekSatyam96/rag-assistant",
+        primary: true,
+      },
+      {
+        label: "Design docs",
+        href: "https://github.com/AbhishekSatyam96/rag-assistant/blob/main/docs/hld.md",
+      },
     ],
+    pipeline: {
+      title: "retrieval pipeline",
+      steps: [
+        { label: "Question", tech: "Next.js UI" },
+        { label: "Embed", tech: "OpenAI · 1536-d" },
+        { label: "ANN search", tech: "pgvector · HNSW" },
+        { label: "Generation", tech: "temp 0 · grounded" },
+        { label: "Cited answer", tech: "NDJSON stream" },
+      ],
+    },
+  },
+  // {
+  //   name: "AI Portfolio Generator",
+  //   kind: "featured",
+  //   tagline: "Claude-powered content studio",
+  //   description:
+  //     "An AI-powered portfolio generator that integrates the Claude API through Next.js server-side API routes to write professional bios and enhance project descriptions. Reusable prompt templates feed a human-in-the-loop flow — the model drafts, the user reviews and edits, then saves.",
+  //   role: "Full-stack — Next.js app, API routes, prompt design & LLM security",
+  //   impact: [
+  //     "Reusable prompt templates with variable injection for bios, projects, and skills",
+  //     "Human-in-the-loop editing flow — no raw AI output ships unreviewed",
+  //     "Secure LLM integration: server-side API keys, input sanitization, rate-limited endpoints",
+  //   ],
+  //   stack: ["Next.js", "TypeScript", "Claude API", "Anthropic SDK", "Node.js"],
+  //   links: [
+  //     { label: "Live demo", href: "#", primary: true }, // TODO: add deployed demo URL
+  //     { label: "Source", href: "" }, // TODO: add GitHub repository URL
+  //   ],
+  //   pipeline: {
+  //     title: "generation flow",
+  //     steps: [
+  //       { label: "Profile input", tech: "Next.js UI" },
+  //       { label: "Sanitize", tech: "API route" },
+  //       { label: "Prompt template", tech: "Variable injection" },
+  //       { label: "Claude API", tech: "@anthropic-ai/sdk" },
+  //       { label: "Review & save", tech: "Human-in-the-loop" },
+  //     ],
+  //   },
+  // },
+  {
+    name: "QKMS",
+    kind: "private",
+    tagline: "Quantum key management · QNu Labs",
+    description:
+      "An enterprise quantum-safe key-management product. I own the delivery pipeline and the interface engineering end-to-end.",
+    role: "Senior Software Engineer — full-stack delivery & release engineering",
+    impact: [
+      "Dockerized GitLab CI/CD pipelines and GCP deployments standardizing releases",
+      "Shared design-system primitives enforcing UI consistency",
+      "Reliable releases monitored in production via Sentry",
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Docker",
+      "GitLab CI/CD",
+      "Sentry",
+    ],
+    badge: "Enterprise · private",
   },
   {
     name: "QVault",
@@ -199,21 +292,6 @@ export const projects: Project[] = [
       "75%+ test coverage with automated regression gates in CI",
     ],
     stack: ["React", "Next.js", "TypeScript", "Node.js", "Docker", "GCP"],
-    badge: "Enterprise · private",
-  },
-  {
-    name: "QKMS",
-    kind: "private",
-    tagline: "Quantum key management · QNu Labs",
-    description:
-      "An enterprise quantum-safe key-management product. I own the delivery pipeline and the interface engineering end-to-end.",
-    role: "Senior Software Engineer — full-stack delivery & release engineering",
-    impact: [
-      "Dockerized GitLab CI/CD pipelines and GCP deployments standardizing releases",
-      "Shared design-system primitives enforcing UI consistency",
-      "Reliable releases monitored in production via Sentry",
-    ],
-    stack: ["Next.js", "TypeScript", "Node.js", "Docker", "GitLab CI/CD", "Sentry"],
     badge: "Enterprise · private",
   },
 ];
@@ -241,7 +319,12 @@ export const coreStack = [
 export const skillDomains: { label: string; groups: string[] }[] = [
   {
     label: "Frontend",
-    groups: ["Languages", "Frameworks & Libraries", "State Management", "UI & Styling"],
+    groups: [
+      "Languages",
+      "Frameworks & Libraries",
+      "State Management",
+      "UI & Styling",
+    ],
   },
   {
     label: "Architecture & Backend",
@@ -253,36 +336,27 @@ export const skillDomains: { label: string; groups: string[] }[] = [
   },
   {
     label: "Delivery & Practices",
-    groups: ["DevOps & Cloud", "Build Tools", "Developer Tooling", "Engineering Practices"],
+    groups: [
+      "DevOps & Cloud",
+      "Build Tools",
+      "Developer Tooling",
+      "Engineering Practices",
+    ],
   },
 ];
 
 export const skills: SkillGroup[] = [
   {
     label: "Languages",
-    items: [
-      "JavaScript (ES6+)",
-      "TypeScript",
-      "HTML5",
-      "CSS3",
-    ],
+    items: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
   },
   {
     label: "Frameworks & Libraries",
-    items: [
-      "React.js",
-      "Next.js",
-      "React Native",
-    ],
+    items: ["React.js", "Next.js", "React Native"],
   },
   {
     label: "State Management",
-    items: [
-      "Redux Toolkit",
-      "Redux",
-      "React Context",
-      "Valtio",
-    ],
+    items: ["Redux Toolkit", "Redux", "React Context", "Valtio"],
   },
   {
     label: "UI & Styling",
@@ -319,10 +393,7 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Databases",
-    items: [
-      "MongoDB",
-      "Mongoose"
-    ],
+    items: ["MongoDB", "Mongoose"],
   },
   {
     label: "Performance & Monitoring",
@@ -338,45 +409,19 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Testing",
-    items: [
-      "Jest",
-      "React Testing Library",
-      "Integration Testing",
-      "TDD",
-    ],
+    items: ["Jest", "React Testing Library", "Integration Testing", "TDD"],
   },
   {
     label: "DevOps & Cloud",
-    items: [
-      "Docker",
-      "Nginx",
-      "GitLab CI/CD",
-      "CircleCI",
-      "GCP",
-      "AWS",
-    ],
+    items: ["Docker", "Nginx", "GitLab CI/CD", "CircleCI", "GCP", "AWS"],
   },
   {
     label: "Build Tools",
-    items: [
-      "Webpack",
-      "Vite",
-      "Babel",
-      "npm",
-      "Yarn",
-      "pnpm",
-    ],
+    items: ["Webpack", "Vite", "Babel", "npm", "Yarn", "pnpm"],
   },
   {
     label: "Developer Tooling",
-    items: [
-      "Git",
-      "ESLint",
-      "SonarQube",
-      "Postman",
-      "Jira",
-      "SAST",
-    ],
+    items: ["Git", "ESLint", "SonarQube", "Postman", "Jira", "SAST"],
   },
   {
     label: "Engineering Practices",

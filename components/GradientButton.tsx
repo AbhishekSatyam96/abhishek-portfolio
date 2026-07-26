@@ -9,16 +9,20 @@ export function GradientButton({
   children,
   className = "",
   ariaLabel,
+  newTab,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  newTab?: boolean;
 }) {
   return (
     <a
       href={href}
       aria-label={ariaLabel}
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noopener noreferrer" : undefined}
       className={`group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-primary via-violet to-accent px-6 py-3 text-sm font-semibold text-bg shadow-[0_0_30px_-10px_rgba(124,140,255,0.8)] transition-shadow duration-300 hover:shadow-[0_0_46px_-6px_rgba(124,140,255,0.95)] ${className}`}
     >
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
@@ -36,16 +40,20 @@ export function GhostButton({
   children,
   className = "",
   ariaLabel,
+  newTab,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
+  newTab?: boolean;
 }) {
   return (
     <a
       href={href}
       aria-label={ariaLabel}
+      target={newTab ? "_blank" : undefined}
+      rel={newTab ? "noopener noreferrer" : undefined}
       className={`inline-flex items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/[0.04] px-6 py-3 text-sm font-medium text-fg backdrop-blur transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07] ${className}`}
     >
       {children}

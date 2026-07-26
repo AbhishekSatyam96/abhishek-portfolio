@@ -1,16 +1,15 @@
 /**
- * Compact RAG pipeline diagram for the keystone card — makes the "full-stack"
- * claim legible at a glance. Pure CSS/SVG, decorative (aria-hidden), no images.
+ * Compact pipeline diagram for the keystone project cards — makes each
+ * featured project's flow legible at a glance. Data comes from the project's
+ * `pipeline` field in content.ts. Pure CSS/SVG, decorative (aria-hidden).
  */
-const steps = [
-  { label: "Question", tech: "React UI" },
-  { label: "Retriever", tech: "Node · Express" },
-  { label: "Vector store", tech: "Embeddings" },
-  { label: "Generation", tech: "LangChain.js" },
-  { label: "Cited answer", tech: "MongoDB log" },
-];
-
-export function RagVisual() {
+export function PipelineVisual({
+  title,
+  steps,
+}: {
+  title: string;
+  steps: { label: string; tech: string }[];
+}) {
   return (
     <div
       aria-hidden="true"
@@ -29,7 +28,7 @@ export function RagVisual() {
       />
 
       <p className="relative font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">
-        retrieval pipeline
+        {title}
       </p>
 
       <ol className="relative mt-4 space-y-3.5">
