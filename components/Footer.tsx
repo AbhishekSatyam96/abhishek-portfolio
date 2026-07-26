@@ -1,4 +1,4 @@
-import { footer, site } from "@/content";
+import { site } from "@/content";
 import { BrandMark } from "@/components/BrandMark";
 import { ArrowUpIcon, GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
@@ -10,9 +10,9 @@ export function Footer() {
           <BrandMark className="h-6 w-6" />
           <div>
             <p className="text-sm font-medium text-fg">{site.name}</p>
-            {footer.built && (
-              <p className="font-mono text-xs text-muted">{footer.built}</p>
-            )}
+            <p className="font-mono text-xs text-muted">
+              {site.role} · {site.location}
+            </p>
           </div>
         </div>
 

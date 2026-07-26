@@ -6,12 +6,18 @@ import { Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 
 /*
- * Metric tokens — numbers with an optional %, s, or + suffix, including
- * "3.8s to 1.9s" / "22% → 72%" ranges. The single capture group makes
- * String.split return matches at odd indices.
+ * Metric tokens — numbers with an optional K/M magnitude and %, s, or + suffix,
+ * including "3.8s to 1.9s" / "22% → 72%" ranges. The magnitude has to be part of
+ * the token or "5K+ users" bolds the 5 and orphans the "K+". The single capture
+ * group makes String.split return matches at odd indices.
  */
-const METRIC =
-  /(\d[\d.,]*(?:%\+?|s\b|\+)?(?:\s*(?:→|to)\s*\d[\d.,]*(?:%\+?|s\b|\+)?)?)/g;
+// The digits have to end on a digit, not on `[\d.,]*` — otherwise "Lighthouse
+// 62 to 88." and "CLS below 0.1," pull the sentence punctuation into the bold.
+const NUMBER = String.raw`\d(?:[\d.,]*\d)?(?:[KMk]\b)?(?:%\+?|s\b|\+)?`;
+const METRIC = new RegExp(
+  `(${NUMBER}(?:\\s*(?:→|to)\\s*${NUMBER})?)`,
+  "g",
+);
 
 /** Renders a bullet with its metrics emphasized; the copy stays verbatim. */
 function MetricText({ text }: { text: string }) {
@@ -42,10 +48,11 @@ export function Experience() {
       />
 
       <div className="relative mt-14">
-        {/* Timeline spine */}
+        {/* Timeline spine. Fades toward the older roles but stays visible to the
+            last node — a fully transparent tail leaves the bottom dots orphaned. */}
         <div
           aria-hidden="true"
-          className="absolute bottom-2 left-2 top-2 w-px bg-gradient-to-b from-primary/70 via-violet/30 to-transparent"
+          className="absolute bottom-2 left-2 top-2 w-px bg-gradient-to-b from-primary/70 via-violet/40 to-white/10"
         />
 
         <Stagger className="space-y-6 sm:space-y-7" stagger={0.1}>

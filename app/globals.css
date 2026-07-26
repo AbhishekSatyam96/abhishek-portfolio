@@ -105,6 +105,42 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  /* Nav surfaces. Unlike .glass these sit over scrolling body copy, so
+     they need enough opacity to actually occlude it — 4% white lets
+     display type read straight through. */
+  .glass-nav {
+    background-color: color-mix(in oklab, var(--color-elevated) 88%, transparent);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  /* The mobile menu drops over body copy far below the scrim's reach, so
+     it carries its own near-solid surface. */
+  .glass-menu {
+    background-color: var(--color-elevated);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Full-bleed scrim behind the nav: the pill is max-w-6xl, so wide
+     headings would otherwise pass uncovered to either side of it. The
+     mask fades the backdrop-filter out with the gradient — without it
+     the blur would stop at a hard edge. */
+  .nav-scrim {
+    background: linear-gradient(
+      to bottom,
+      var(--color-bg),
+      var(--color-bg) 62%,
+      transparent
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to bottom, #000 62%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+  }
+
   /* Multi-hue aurora text gradient. */
   .text-gradient {
     background-image: linear-gradient(

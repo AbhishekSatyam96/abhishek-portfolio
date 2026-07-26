@@ -2,8 +2,7 @@
  * content.ts — single source of truth for all site copy.
  *
  * Resume metrics are transcribed verbatim; do not re-round or invent numbers.
- * TODO placeholders (GitHub, résumé PDF, custom domain, project links) are the
- * only values meant to be edited before launch — search for "TODO".
+ * Remaining TODO placeholders live in the commented-out project block below.
  */
 
 export type NavLink = { label: string; href: string };
@@ -47,7 +46,7 @@ export const site = {
   name: "Abhishek Satyam",
   role: "Senior Software Engineer",
   positioning: "Full-Stack (Frontend-Heavy)",
-  stackLine: "React · Next.js · Node.js",
+  stackLine: "React · Next.js · Node.js · PostgreSQL · Gen AI",
   location: "Bengaluru, India",
   availability: "Open to Senior / Lead roles",
   email: "abhishek.satyam96@gmail.com",
@@ -55,12 +54,17 @@ export const site = {
   // Live links
   linkedin: "https://www.linkedin.com/in/abhishek-satyam/",
   github: "https://github.com/AbhishekSatyam96",
-  resumeUrl:
-    "https://drive.google.com/file/d/1mj6_6M-f4k8NmYq2NZ6el6pZlBvHIHoh/view?usp=sharing",
+  /**
+   * Self-hosted: `public/resume.pdf`, served at the clean /resume URL by the
+   * rewrite in next.config.ts. Deliberately not a Google Drive link — Drive adds
+   * a sign-in interstitial and viewer chrome, and breaks if sharing perms drift.
+   * Keep public/resume.pdf in sync with the copy you send out.
+   */
+  resumeUrl: "/resume",
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.dev", // TODO: set custom domain
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.com",
   description:
-    "Abhishek Satyam — Senior Software Engineer, Full-Stack (Frontend-Heavy). 7 years shipping scalable, high-performance React, Next.js & TypeScript apps end-to-end, now building post-quantum cryptography products at QNu Labs. Open to Senior / Lead roles.",
+    "Abhishek Satyam — Senior Software Engineer, Full-Stack (Frontend-Heavy). 7 years shipping scalable, high-performance React, Next.js & TypeScript apps end-to-end, now building post-quantum cryptography products at QNu Labs and multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles.",
 };
 
 export const nav: NavLink[] = [
@@ -78,9 +82,8 @@ export const hero = {
   statement: ["Building software that scales from", "pixels to production."],
   // Short, scannable intro for the hero.
   intro:
-    "Frontend-heavy full-stack engineer with 7 years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs.",
-  // Projects section is currently hidden, so the primary CTA lands on Experience.
-  primaryCta: { label: "View work", href: "#experience" },
+    "Frontend-heavy full-stack engineer with 7 years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs — and RAG systems on Postgres + pgvector on my own time.",
+  primaryCta: { label: "View work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   stats: [
     { value: "7 yrs", label: "shipping production web apps" },
@@ -91,18 +94,24 @@ export const hero = {
 
 export const about = {
   eyebrow: "// about",
-  title: "Full ownership, frontend-first.",
-  // The MERN phrasing below is intentional and must stay exact.
+  title: "Frontend-deep, full-stack wide.",
   paragraphs: [
-    "Full-stack engineer with a frontend-heavy focus and 7 years building and shipping scalable, high-performance web applications end-to-end. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development across the MERN stack (Node.js, Express, MongoDB).",
+    "Full-stack engineer with a frontend-heavy focus and 7 years building and shipping scalable, high-performance web applications end-to-end. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.",
     "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of leading engineering teams, building products from the ground up, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
+    "Recent focus: Generative AI — designing multi-tenant RAG / LLM systems on PostgreSQL + pgvector, from the ingestion pipeline through vector search to citation-grounded token streaming.",
   ],
   highlights: [
     "End-to-end ownership: system design → testing → deploy → production ops",
     "Core Web Vitals improved by up to 50%; Lighthouse held at 90+",
     "Test coverage lifted from 22% to 72% across U.S. & Australian markets",
     "Led engineering teams and built products from the ground up",
+    "Gen AI: multi-tenant RAG on PostgreSQL + pgvector, built end-to-end",
+    "40+ reusable components architected, cutting feature-development time ~35%",
   ],
+  /** Right-hand "at a glance" card — the scannable version for a recruiter. */
+  glance: {
+    openTo: "Senior / Lead — frontend & full-stack, at product companies",
+  },
 };
 
 export const experience: Role[] = [
@@ -135,7 +144,9 @@ export const experience: Role[] = [
     company: "AntWalk",
     title: "Senior Software Engineer",
     period: "July 2020 – March 2025",
-    context: "Enterprise SaaS · 50+ clients",
+    // Two different scopes, so both numbers are spelled out: 150+ is the company's
+    // client base, the 50+ in the bullet below is what my team's platform served.
+    context: "Enterprise SaaS · 150+ clients companywide",
     bullets: [
       "Architected a library of 40+ reusable React, Next.js, and TypeScript components, cutting feature-development time ~35% and ensuring design consistency across the product.",
       "Led a 6-engineer team building the core SaaS platform for 50+ enterprise clients, owning system design, implementation, testing, and deployment across 12+ major releases.",
@@ -173,7 +184,7 @@ export const experience: Role[] = [
     period: "January 2019 – June 2019",
     context: "Internal Project",
     bullets: [
-      "Completed Advanced Java training (JSP, Servlets, Spring MVC, Hibernate) and built a Spring MVC web application. Contributed to an ECM project using FileNet under Cognizant Digital Business",
+      "Completed Advanced Java training (JSP, Servlets, Spring MVC, Hibernate) and built a Spring MVC web application. Contributed to an ECM project using FileNet under Cognizant Digital Business.",
     ],
     tags: ["Spring Boot", "HTML", "CSS"],
   },
@@ -192,10 +203,11 @@ export const projects: Project[] = [
       "corpus can't support an answer.",
     role: "Full-stack — API, data model, retrieval pipeline & frontend",
     impact: [
-      "Vector search on Postgres/pgvector: HNSW index, cosine distance, per-request tuning inside a transaction",
-      "Multi-tenant isolation enforced in raw SQL, where the ORM's type safety doesn't reach",
-      "Token streaming over NDJSON with citations sent ahead of the first token",
-      "Ingestion pipeline with SHA-256 dedupe, batched embeddings, and a PENDING→READY state machine",
+      "HNSW over IVFFlat on pgvector — IVFFlat centroids degrade permanently on an incrementally grown table — tuned per request via transaction-scoped SET LOCAL",
+      "Tenant isolation enforced in raw SQL where the ORM's type safety doesn't reach, with pgvector 0.8 iterative scan (strict_order) so post-filtering can't silently return fewer than top-k",
+      "Token streaming over NDJSON rather than SSE — EventSource can't send a Bearer header — with citations sent ahead of the first token",
+      "Ingestion: SHA-256 dedupe → recursive chunking → embeddings batched 100/request, behind a PENDING→READY state machine",
+      "Client disconnects propagated to OpenAI via AbortController, so abandoned requests stop billing",
     ],
     stack: [
       "TypeScript",
@@ -302,6 +314,9 @@ export const coreStack = [
   "Next.js",
   "TypeScript",
   "Node.js",
+  "PostgreSQL",
+  "pgvector",
+  "RAG / LLM",
   "GraphQL",
   "Tailwind CSS",
   "Docker",
@@ -313,8 +328,12 @@ export const coreStack = [
 
 /**
  * Presentation grouping for the Skills section: each domain collects skill
- * groups (by label) into one card so the section reads as four disciplines
- * instead of a flat wall of thirteen cards.
+ * groups (by label) into one card so the section reads as six disciplines
+ * instead of a flat wall of fourteen cards.
+ *
+ * Cards flow into CSS columns (see Skills.tsx), so uneven domain sizes pack
+ * rather than leaving dead space — no need to balance adjacent pairs by hand.
+ * Order still drives the 01–06 numbering, which reads down column one then two.
  */
 export const skillDomains: { label: string; groups: string[] }[] = [
   {
@@ -327,28 +346,35 @@ export const skillDomains: { label: string; groups: string[] }[] = [
     ],
   },
   {
-    label: "Architecture & Backend",
-    groups: ["Architecture", "Backend & APIs", "Databases"],
+    label: "Backend & Data",
+    groups: ["Backend & APIs", "Databases"],
+  },
+  {
+    // Architecture rides here rather than under Backend: half its items are
+    // frontend concerns (Component Architecture, Micro-Frontends, SSR/SSG/ISR),
+    // and the rest — System Design, Multi-Tenancy, Caching — is what the
+    // multi-tenant RAG work is actually made of.
+    label: "Gen AI & Architecture",
+    groups: ["Gen AI / LLM", "Architecture"],
   },
   {
     label: "Quality & Performance",
     groups: ["Performance & Monitoring", "Testing"],
   },
   {
-    label: "Delivery & Practices",
-    groups: [
-      "DevOps & Cloud",
-      "Build Tools",
-      "Developer Tooling",
-      "Engineering Practices",
-    ],
+    label: "Delivery & Cloud",
+    groups: ["DevOps & Cloud", "Build Tools"],
+  },
+  {
+    label: "Tooling & Practices",
+    groups: ["Developer Tooling", "Engineering Practices"],
   },
 ];
 
 export const skills: SkillGroup[] = [
   {
     label: "Languages",
-    items: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+    items: ["TypeScript", "JavaScript (ES6+)", "SQL", "HTML5", "CSS3"],
   },
   {
     label: "Frameworks & Libraries",
@@ -375,6 +401,7 @@ export const skills: SkillGroup[] = [
       "System Design",
       "Component Architecture",
       "Micro-Frontends",
+      "Multi-Tenancy",
       "SSR/SSG/ISR",
       "Caching Strategies",
     ],
@@ -389,11 +416,33 @@ export const skills: SkillGroup[] = [
       "Apollo Client",
       "OpenAPI",
       "Contract-Driven Integration",
+      "NDJSON / SSE Streaming",
     ],
   },
   {
     label: "Databases",
-    items: ["MongoDB", "Mongoose"],
+    items: [
+      "PostgreSQL",
+      "pgvector",
+      "MongoDB",
+      "Mongoose",
+      "Schema Design",
+      "Indexing",
+      "Query Optimization",
+    ],
+  },
+  {
+    label: "Gen AI / LLM",
+    items: [
+      "Generative AI",
+      "RAG",
+      "OpenAI API",
+      "Embeddings",
+      "Vector Search (HNSW, IVFFlat)",
+      "Chunking Strategies",
+      "Token Streaming",
+      "Citation Grounding",
+    ],
   },
   {
     label: "Performance & Monitoring",
@@ -417,7 +466,7 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Build Tools",
-    items: ["Webpack", "Vite", "Babel", "npm", "Yarn", "pnpm"],
+    items: ["Webpack", "Vite", "Babel", "npm", "Yarn", "Parcel"],
   },
   {
     label: "Developer Tooling",
@@ -429,6 +478,8 @@ export const skills: SkillGroup[] = [
       "Agile/Scrum",
       "Feature Flags (LaunchDarkly, Split)",
       "A/B Testing",
+      "Code Review",
+      "Mentoring",
     ],
   },
 ];
@@ -450,8 +501,4 @@ export const contact = {
   body: "I'm open to Senior / Lead frontend and full-stack roles at strong product companies.",
   email: site.email,
   phone: site.phone,
-};
-
-export const footer = {
-  built: "",
 };

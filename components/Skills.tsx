@@ -64,11 +64,14 @@ export function Skills() {
         </div>
       </Reveal>
 
-      {/* Four disciplines instead of a flat wall of thirteen cards. */}
-      <Stagger className="mt-8 grid gap-4 sm:grid-cols-2" stagger={0.07}>
+      {/* Six disciplines instead of a flat wall of fourteen cards.
+          CSS columns rather than a grid: the domains differ a lot in item count,
+          and equal-height grid rows left the shorter card in each pair with a
+          block of dead space. Columns pack them by height instead. */}
+      <Stagger className="mt-8 gap-4 sm:columns-2" stagger={0.07}>
         {domains.map((domain, i) => (
-          <StaggerItem key={domain.label} className="h-full">
-            <SpotlightCard className="group glass h-full rounded-2xl p-6 transition-colors duration-300 hover:border-white/15 sm:p-7">
+          <StaggerItem key={domain.label} className="mb-4 break-inside-avoid">
+            <SpotlightCard className="group glass rounded-2xl p-6 transition-colors duration-300 hover:border-white/15 sm:p-7">
               <header className="flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-xl font-semibold tracking-tight text-fg">
                   {domain.label}

@@ -46,7 +46,10 @@ export function Projects() {
               {/* Gradient border */}
               <div className="relative rounded-[28px] bg-gradient-to-r from-primary via-violet to-accent p-px shadow-[0_30px_80px_-30px_rgba(124,140,255,0.6)]">
                 <div className="rounded-[27px] bg-elevated/95 p-6 backdrop-blur-xl sm:p-8 lg:p-10">
-                  <div className="grid items-center gap-8 lg:grid-cols-5 lg:gap-10">
+                  {/* items-stretch (the default) rather than items-center: the
+                      pipeline diagram grows to the card's height instead of
+                      floating in the middle of an empty column. */}
+                  <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
                     <div className="lg:col-span-3">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-accent px-2.5 py-1 font-mono text-[0.7rem] font-medium uppercase tracking-wider text-bg">
@@ -67,11 +70,15 @@ export function Projects() {
                         <ImpactList items={p.impact} />
                       </div>
 
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {p.stack.map((s) => (
-                          <Tag key={s}>{s}</Tag>
-                        ))}
-                      </div>
+                      {/* With a pipeline panel the stack lives there instead, so
+                          the two columns stay closer in height. */}
+                      {!p.pipeline && (
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {p.stack.map((s) => (
+                            <Tag key={s}>{s}</Tag>
+                          ))}
+                        </div>
+                      )}
 
                       <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                         {p.links?.map((l) =>
@@ -104,7 +111,11 @@ export function Projects() {
 
                     {p.pipeline && (
                       <div className="lg:col-span-2">
-                        <PipelineVisual title={p.pipeline.title} steps={p.pipeline.steps} />
+                        <PipelineVisual
+                          title={p.pipeline.title}
+                          steps={p.pipeline.steps}
+                          stack={p.stack}
+                        />
                       </div>
                     )}
                   </div>
@@ -158,13 +169,17 @@ export function Projects() {
                 <ImpactList items={p.impact} />
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
+              {/* mb-5 is the floor for the mt-auto note below, which collapses
+                  to zero margin on whichever card is the tallest. */}
+              <div className="mt-5 mb-5 flex flex-wrap gap-2">
                 {p.stack.map((s) => (
                   <Tag key={s}>{s}</Tag>
                 ))}
               </div>
 
-              <p className="mt-5 border-t border-white/8 pt-4 font-mono text-xs text-muted">
+              {/* mt-auto so the note sits on the card's floor — the two cards
+                  carry different amounts of copy and would otherwise ragged. */}
+              <p className="mt-auto border-t border-white/8 pt-4 font-mono text-xs text-muted">
                 Architecture &amp; live links withheld under NDA — happy to walk through it in a call.
               </p>
             </SpotlightCard>

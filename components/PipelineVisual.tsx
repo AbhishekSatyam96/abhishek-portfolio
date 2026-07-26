@@ -1,22 +1,28 @@
+import { Tag } from "@/components/primitives";
+
 /**
- * Compact pipeline diagram for the keystone project cards — makes each
- * featured project's flow legible at a glance. Data comes from the project's
- * `pipeline` field in content.ts. Pure CSS/SVG, decorative (aria-hidden).
+ * Spec panel for the keystone project cards: the flow diagram and the stack it
+ * runs on. Data comes from the project's `pipeline` and `stack` fields in
+ * content.ts. Pure CSS, no images.
+ *
+ * The panel stretches to the card's height, so it carries the stack rather than
+ * leaving the column empty around a floating diagram — the left column's
+ * narrative is always the taller of the two.
  */
 export function PipelineVisual({
   title,
   steps,
+  stack,
 }: {
   title: string;
   steps: { label: string; tech: string }[];
+  stack?: string[];
 }) {
   return (
-    <div
-      aria-hidden="true"
-      className="relative h-full overflow-hidden rounded-2xl border border-white/8 bg-bg/40 p-5 sm:p-6"
-    >
+    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-bg/40 p-5 sm:p-6">
       {/* faint lattice grid */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 opacity-[0.18]"
         style={{
           backgroundImage:
@@ -31,9 +37,14 @@ export function PipelineVisual({
         {title}
       </p>
 
-      <ol className="relative mt-4 space-y-3.5">
+      {/* Compact rather than stretched — spreading five steps over a full-height
+          column dilutes the diagram. The blocks below take up the slack. */}
+      <ol className="relative mt-5 space-y-3.5">
         {/* connecting spine */}
-        <span className="absolute bottom-3 left-[7px] top-3 w-px bg-gradient-to-b from-primary via-violet to-accent" />
+        <span
+          aria-hidden="true"
+          className="absolute bottom-3 left-[7px] top-3 w-px bg-gradient-to-b from-primary via-violet to-accent"
+        />
         {steps.map((s, i) => (
           <li key={s.label} className="relative flex items-center gap-3 pl-6">
             <span
@@ -52,6 +63,19 @@ export function PipelineVisual({
           </li>
         ))}
       </ol>
+
+      {stack && stack.length > 0 && (
+        <div className="relative mt-auto border-t border-white/8 pt-5">
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
+            Stack
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {stack.map((s) => (
+              <Tag key={s}>{s}</Tag>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

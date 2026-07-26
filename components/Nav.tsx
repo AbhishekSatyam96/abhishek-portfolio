@@ -61,11 +61,20 @@ export function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
+      {/* Edge-to-edge scrim so content scrolling past isn't visible
+          alongside the centred pill. */}
+      <div
+        aria-hidden
+        className={`nav-scrim pointer-events-none absolute inset-x-0 top-0 h-32 transition-opacity duration-300 ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
       <nav
         aria-label="Primary"
-        className={`mx-auto flex max-w-6xl items-center justify-between px-6 transition-all duration-300 sm:px-8 ${
+        className={`relative mx-auto flex max-w-6xl items-center justify-between px-6 transition-all duration-300 sm:px-8 ${
           scrolled
-            ? "my-2 rounded-2xl glass py-2.5 shadow-[0_8px_40px_-12px_rgba(91,91,245,0.35)]"
+            ? "my-2 rounded-2xl glass-nav py-2.5 shadow-[0_8px_40px_-12px_rgba(91,91,245,0.35)]"
             : "my-0 py-5"
         }`}
       >
@@ -88,7 +97,7 @@ export function Nav() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  aria-current={isActive ? "true" : undefined}
+                  aria-current={isActive ? "location" : undefined}
                   className={`relative rounded-lg px-3 py-2 text-sm transition-colors ${
                     isActive ? "text-fg" : "text-muted hover:text-fg"
                   }`}
@@ -155,7 +164,7 @@ export function Nav() {
       <div
         id="mobile-menu"
         inert={!open}
-        className={`mx-4 overflow-hidden rounded-2xl glass transition-[max-height,opacity] duration-300 md:hidden ${
+        className={`relative mx-4 overflow-hidden rounded-2xl glass-menu shadow-[0_16px_48px_-12px_rgba(0,0,0,0.7)] transition-[max-height,opacity] duration-300 md:hidden ${
           open ? "max-h-96 opacity-100" : "pointer-events-none max-h-0 opacity-0"
         }`}
       >

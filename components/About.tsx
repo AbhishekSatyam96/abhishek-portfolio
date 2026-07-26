@@ -47,7 +47,7 @@ export function About() {
 
         {/* At-a-glance card */}
         <Reveal delay={0.1} className="lg:col-span-2">
-          <div className="glass h-full rounded-2xl p-6 sm:p-7">
+          <div className="glass flex h-full flex-col rounded-2xl p-6 sm:p-7">
             <p className="eyebrow">{"// at a glance"}</p>
 
             <dl className="mt-5 space-y-5 text-sm">
@@ -95,7 +95,38 @@ export function About() {
                   </ul>
                 </dd>
               </div>
+
+              <div className="hairline" />
+
+              <div>
+                <dt className="font-mono text-xs uppercase tracking-wider text-muted">
+                  Open to
+                </dt>
+                <dd className="mt-1 text-fg">
+                  {about.glance.openTo}
+                  <span className="block text-muted">{site.location}</span>
+                </dd>
+              </div>
             </dl>
+
+            {/* Pinned to the card's bottom: the three things a recruiter clicks. */}
+            <div className="mt-auto flex flex-wrap gap-2 pt-8">
+              {[
+                { label: "Résumé", href: site.resumeUrl },
+                { label: "LinkedIn", href: site.linkedin },
+                { label: "GitHub", href: site.github },
+              ].map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-muted transition-colors hover:border-white/20 hover:text-fg"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
