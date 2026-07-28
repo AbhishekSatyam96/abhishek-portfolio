@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { coreStack, education, experience, site } from "@/content";
 import { GrainOverlay } from "@/components/GrainOverlay";
@@ -157,6 +158,9 @@ export default function RootLayout({
         </a>
         {children}
         <GrainOverlay />
+        {/* Vercel Web Analytics — cookieless page views, so no consent banner.
+            Injects nothing in dev; only reports from deployed environments. */}
+        <Analytics />
       </body>
     </html>
   );

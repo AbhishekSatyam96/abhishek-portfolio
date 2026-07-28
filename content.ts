@@ -194,20 +194,20 @@ export const projects: Project[] = [
   {
     name: "RAG Knowledge Assistant",
     kind: "featured",
-    tagline: "Postgres + pgvector · streaming · open source",
+    tagline: "Live · Postgres + pgvector · streaming",
     description:
       "A full-stack app that answers questions over your own documents. An Express + TypeScript API " +
       "handles ingestion (dedupe → chunk → embed) and retrieval, Postgres with pgvector serves " +
-      "approximate-nearest-neighbour search over an HNSW index scoped per tenant, and a Next.js " +
-      "frontend streams grounded answers with inline, clickable citations — or a refusal when the " +
-      "corpus can't support an answer.",
+      "approximate-nearest-neighbour search over an HNSW index, and a Next.js frontend streams " +
+      "grounded answers with inline, clickable citations — down to the page number on PDFs — or a " +
+      "refusal when the corpus can't support an answer.",
     role: "Full-stack — API, data model, retrieval pipeline & frontend",
     impact: [
-      "HNSW over IVFFlat on pgvector — IVFFlat centroids degrade permanently on an incrementally grown table — tuned per request via transaction-scoped SET LOCAL",
-      "Tenant isolation enforced in raw SQL where the ORM's type safety doesn't reach, with pgvector 0.8 iterative scan (strict_order) so post-filtering can't silently return fewer than top-k",
+      "HNSW over IVFFlat on pgvector — IVFFlat learns its centroids at build time, so an index built before the corpus exists is permanently bad; HNSW builds incrementally as uploads arrive",
+      "Tenant isolation enforced in raw SQL where the ORM's type safety doesn't reach: one shared index plus an ownership predicate, with pgvector 0.8 iterative scan (strict_order) so post-filtering can't silently return fewer than top-k — recall tuned per request via transaction-scoped SET LOCAL",
       "Token streaming over NDJSON rather than SSE — EventSource can't send a Bearer header — with citations sent ahead of the first token",
-      "Ingestion: SHA-256 dedupe → recursive chunking → embeddings batched 100/request, behind a PENDING→READY state machine",
-      "Client disconnects propagated to OpenAI via AbortController, so abandoned requests stop billing",
+      'Ingestion: SHA-256 dedupe → page-aware chunking so PDF citations read "page 7" instead of "chunk 12" → embeddings batched 100/request, behind a PENDING→READY state machine',
+      "Cost control on the expensive route: Redis-backed rate limits that survive autoscaling, a per-user in-flight cap on streams, and client disconnects propagated to OpenAI via AbortController",
     ],
     stack: [
       "TypeScript",
@@ -217,17 +217,18 @@ export const projects: Project[] = [
       "PostgreSQL",
       "pgvector",
       "Prisma",
+      "Redis",
       "OpenAI",
     ],
     links: [
       {
-        label: "Source",
-        href: "https://github.com/AbhishekSatyam96/rag-assistant",
+        label: "Live demo",
+        href: "https://rag.abhisheksatyam.com",
         primary: true,
       },
       {
-        label: "Design docs",
-        href: "https://github.com/AbhishekSatyam96/rag-assistant/blob/main/docs/hld.md",
+        label: "Source",
+        href: "https://github.com/AbhishekSatyam96/rag-assistant",
       },
     ],
     pipeline: {
