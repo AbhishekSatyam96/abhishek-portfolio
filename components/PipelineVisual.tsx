@@ -1,25 +1,20 @@
-import { Tag } from "@/components/primitives";
-
 /**
- * Spec panel for the keystone project cards: the flow diagram and the stack it
- * runs on. Data comes from the project's `pipeline` and `stack` fields in
- * content.ts. Pure CSS, no images.
+ * Flow diagram for the keystone project cards, from the project's `pipeline`
+ * field in content.ts. Pure CSS, no images.
  *
- * The panel stretches to the card's height, so it carries the stack rather than
- * leaving the column empty around a floating diagram — the left column's
- * narrative is always the taller of the two.
+ * Sized to its own content, never stretched to the card — it sits beside the
+ * card's header block only, with the stack bar and engineering notes running
+ * full-width underneath, so neither column has to pad out dead space.
  */
 export function PipelineVisual({
   title,
   steps,
-  stack,
 }: {
   title: string;
   steps: { label: string; tech: string }[];
-  stack?: string[];
 }) {
   return (
-    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-bg/40 p-5 sm:p-6">
+    <div className="relative overflow-hidden rounded-2xl border border-white/8 bg-bg/40 p-5 sm:p-6">
       {/* faint lattice grid */}
       <div
         aria-hidden="true"
@@ -37,9 +32,7 @@ export function PipelineVisual({
         {title}
       </p>
 
-      {/* Compact rather than stretched — spreading five steps over a full-height
-          column dilutes the diagram. The blocks below take up the slack. */}
-      <ol className="relative mt-5 space-y-3.5">
+      <ol className="relative mt-5 space-y-4">
         {/* connecting spine */}
         <span
           aria-hidden="true"
@@ -63,19 +56,6 @@ export function PipelineVisual({
           </li>
         ))}
       </ol>
-
-      {stack && stack.length > 0 && (
-        <div className="relative mt-auto border-t border-white/8 pt-5">
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
-            Stack
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {stack.map((s) => (
-              <Tag key={s}>{s}</Tag>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

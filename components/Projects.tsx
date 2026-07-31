@@ -24,6 +24,35 @@ function ImpactList({ items }: { items: string[] }) {
   );
 }
 
+/**
+ * The featured card's engineering deep-dive. Each note is a decision headline
+ * plus the reasoning, so the card can be skimmed by headline alone.
+ *
+ * CSS columns rather than a grid: notes of uneven length pack into balanced
+ * columns with no orphaned cell, and collapse to one column on small screens
+ * for free. `break-inside-avoid` keeps a note from splitting.
+ */
+function EngineeringNotes({ notes }: { notes: { label: string; detail: string }[] }) {
+  return (
+    <ol className="gap-x-10 sm:columns-2">
+      {notes.map((n, i) => (
+        <li
+          key={n.label}
+          className="mb-5 break-inside-avoid border-t border-white/8 pt-4 last:mb-0"
+        >
+          <div className="flex items-baseline gap-2.5">
+            <span aria-hidden="true" className="font-mono text-[0.7rem] text-primary/70">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h4 className="text-sm font-semibold text-fg">{n.label}</h4>
+          </div>
+          <p className="mt-1.5 pl-[1.9rem] text-sm leading-relaxed text-muted">{n.detail}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export function Projects() {
   return (
     <Section id="projects" labelledBy="projects-title">
@@ -46,10 +75,11 @@ export function Projects() {
               {/* Gradient border */}
               <div className="relative rounded-[28px] bg-gradient-to-r from-primary via-violet to-accent p-px shadow-[0_30px_80px_-30px_rgba(124,140,255,0.6)]">
                 <div className="rounded-[27px] bg-elevated/95 p-6 backdrop-blur-xl sm:p-8 lg:p-10">
-                  {/* items-stretch (the default) rather than items-center: the
-                      pipeline diagram grows to the card's height instead of
-                      floating in the middle of an empty column. */}
-                  <div className="grid gap-8 lg:grid-cols-5 lg:gap-10">
+                  {/* Header band: the pitch and both CTAs sit beside the
+                      pipeline panel, so the card leads with a link instead of
+                      burying it under the deep-dive. items-start — neither
+                      column stretches to match the other. */}
+                  <div className="grid items-start gap-8 lg:grid-cols-5 lg:gap-10">
                     <div className="lg:col-span-3">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-accent px-2.5 py-1 font-mono text-[0.7rem] font-medium uppercase tracking-wider text-bg">
@@ -65,22 +95,9 @@ export function Projects() {
                       <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
                         {p.description}
                       </p>
+                      <p className="mt-3 font-mono text-xs text-muted/80">{p.role}</p>
 
-                      <div className="mt-5">
-                        <ImpactList items={p.impact} />
-                      </div>
-
-                      {/* With a pipeline panel the stack lives there instead, so
-                          the two columns stay closer in height. */}
-                      {!p.pipeline && (
-                        <div className="mt-6 flex flex-wrap gap-2">
-                          {p.stack.map((s) => (
-                            <Tag key={s}>{s}</Tag>
-                          ))}
-                        </div>
-                      )}
-
-                      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         {p.links?.map((l) =>
                           l.primary ? (
                             <Magnetic key={l.label}>
@@ -107,6 +124,7 @@ export function Projects() {
                           ),
                         )}
                       </div>
+
                     </div>
 
                     {p.pipeline && (
@@ -114,11 +132,42 @@ export function Projects() {
                         <PipelineVisual
                           title={p.pipeline.title}
                           steps={p.pipeline.steps}
-                          stack={p.stack}
                         />
                       </div>
                     )}
                   </div>
+
+                  {/* Stack as a full-width bar rather than chips wrapped three
+                      deep inside the side panel — it's the row people scan for
+                      keywords, and at card width it fits on one line. */}
+                  <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-white/8 pt-5">
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
+                      Stack
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {p.stack.map((s) => (
+                        <Tag key={s}>{s}</Tag>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Deep-dive runs the full card width: at five paragraphs it
+                      was what made this card taller than the viewport when
+                      confined to a 3/5 column. */}
+                  {p.notes && p.notes.length > 0 && (
+                    <div className="mt-7 border-t border-white/8 pt-6">
+                      <p className="mb-4 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">
+                        Engineering notes
+                      </p>
+                      <EngineeringNotes notes={p.notes} />
+                    </div>
+                  )}
+
+                  {p.impact && p.impact.length > 0 && (
+                    <div className="mt-9 border-t border-white/8 pt-7">
+                      <ImpactList items={p.impact} />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -127,7 +176,7 @@ export function Projects() {
       </div>
 
       {/* Private — NDA case studies */}
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-14 flex items-center gap-3">
         <span className="font-mono text-xs uppercase tracking-wider text-muted">
           Enterprise work
         </span>
@@ -165,9 +214,11 @@ export function Projects() {
               <p className="mt-4 text-sm leading-relaxed text-muted">{p.description}</p>
               <p className="mt-3 text-sm font-medium text-fg/90">{p.role}</p>
 
-              <div className="mt-4">
-                <ImpactList items={p.impact} />
-              </div>
+              {p.impact && (
+                <div className="mt-4">
+                  <ImpactList items={p.impact} />
+                </div>
+              )}
 
               {/* mb-5 is the floor for the mt-auto note below, which collapses
                   to zero margin on whichever card is the tallest. */}

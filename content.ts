@@ -31,7 +31,14 @@ export type Project = {
   tagline: string;
   description: string;
   role: string;
-  impact: string[];
+  /** Private (NDA) cards: flat bullet list of outcomes. */
+  impact?: string[];
+  /**
+   * Featured cards: decision → rationale pairs rendered as the "engineering
+   * notes" grid. Two fields rather than one long sentence so the card stays
+   * scannable — the label is what was decided, the detail is why.
+   */
+  notes?: { label: string; detail: string }[];
   stack: string[];
   /** Private (NDA) cards render a lock + "Enterprise · private" and no links. */
   badge?: string;
@@ -196,18 +203,37 @@ export const projects: Project[] = [
     kind: "featured",
     tagline: "Live · Postgres + pgvector · streaming",
     description:
-      "A full-stack app that answers questions over your own documents. An Express + TypeScript API " +
-      "handles ingestion (dedupe → chunk → embed) and retrieval, Postgres with pgvector serves " +
-      "approximate-nearest-neighbour search over an HNSW index, and a Next.js frontend streams " +
-      "grounded answers with inline, clickable citations — down to the page number on PDFs — or a " +
-      "refusal when the corpus can't support an answer.",
+      "Answers questions over your own documents, with citations. An Express + TypeScript API handles " +
+      "ingestion and retrieval, Postgres with pgvector serves approximate-nearest-neighbour search " +
+      "over an HNSW index, and a Next.js frontend streams grounded answers — cited down to the PDF " +
+      "page — or refuses when the corpus can't support one.",
     role: "Full-stack — API, data model, retrieval pipeline & frontend",
-    impact: [
-      "HNSW over IVFFlat on pgvector — IVFFlat learns its centroids at build time, so an index built before the corpus exists is permanently bad; HNSW builds incrementally as uploads arrive",
-      "Tenant isolation enforced in raw SQL where the ORM's type safety doesn't reach: one shared index plus an ownership predicate, with pgvector 0.8 iterative scan (strict_order) so post-filtering can't silently return fewer than top-k — recall tuned per request via transaction-scoped SET LOCAL",
-      "Token streaming over NDJSON rather than SSE — EventSource can't send a Bearer header — with citations sent ahead of the first token",
-      'Ingestion: SHA-256 dedupe → page-aware chunking so PDF citations read "page 7" instead of "chunk 12" → embeddings batched 100/request, behind a PENDING→READY state machine',
-      "Cost control on the expensive route: Redis-backed rate limits that survive autoscaling, a per-user in-flight cap on streams, and client disconnects propagated to OpenAI via AbortController",
+    notes: [
+      {
+        label: "HNSW over IVFFlat",
+        detail:
+          "IVFFlat learns its centroids at build time, so an index built before the corpus exists is permanently bad. HNSW builds incrementally as uploads arrive.",
+      },
+      {
+        label: "Tenant isolation in raw SQL",
+        detail:
+          "One shared index plus an ownership predicate, where the ORM's types don't reach. pgvector 0.8 iterative scan (strict_order) keeps post-filtering from silently returning fewer than top-k, with recall tuned per request via transaction-scoped SET LOCAL.",
+      },
+      {
+        label: "NDJSON streaming, not SSE",
+        detail:
+          "EventSource can't send a Bearer header. Citations go out ahead of the first token, so the answer renders already grounded.",
+      },
+      {
+        label: "Page-aware ingestion",
+        detail:
+          'SHA-256 dedupe → page-aware chunking, so PDF citations read "page 7" rather than "chunk 12" → embeddings batched 100/request, behind a PENDING→READY state machine.',
+      },
+      {
+        label: "Cost control on the expensive route",
+        detail:
+          "Redis-backed rate limits that survive autoscaling, a per-user in-flight cap on streams, and client disconnects propagated to OpenAI via AbortController.",
+      },
     ],
     stack: [
       "TypeScript",
