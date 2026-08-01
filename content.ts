@@ -49,11 +49,39 @@ export type Project = {
 
 /* ------------------------------------------------------------------ */
 
+/**
+ * Years of experience, derived — never written out by hand.
+ *
+ * The count appears in the meta description, the hero intro, a hero stat, the
+ * about copy and the experience heading. Hardcoding "7" in five places means
+ * four of them are wrong the day after the anniversary, and the Resume says
+ * something different again. One constant, and they all move together.
+ *
+ * Counts from the Cognizant Program Analyst role (July 2019) — the same basis
+ * the Resume uses, so the earlier internship doesn't inflate the number.
+ */
+const CAREER_START = Date.UTC(2019, 6, 1); // July 2019
+const MS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+
+export const yearsExperience = Math.floor(
+  (Date.now() - CAREER_START) / MS_PER_YEAR,
+);
+
+/** Word form, for display headings where a numeral reads cheap. */
+const YEAR_WORDS: Record<number, string> = {
+  7: "Seven",
+  8: "Eight",
+  9: "Nine",
+  10: "Ten",
+  11: "Eleven",
+  12: "Twelve",
+};
+const yearsWord = YEAR_WORDS[yearsExperience] ?? String(yearsExperience);
+
 export const site = {
   name: "Abhishek Satyam",
   role: "Senior Software Engineer",
   positioning: "Full-Stack (Frontend-Heavy)",
-  stackLine: "React · Next.js · Node.js · PostgreSQL · Gen AI",
   location: "Bengaluru, India",
   availability: "Open to Senior / Lead roles",
   email: "abhishek.satyam96@gmail.com",
@@ -70,8 +98,7 @@ export const site = {
   resumeUrl: "/resume",
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.com",
-  description:
-    "Abhishek Satyam — Senior Software Engineer, Full-Stack (Frontend-Heavy). 7 years shipping scalable, high-performance React, Next.js & TypeScript apps end-to-end, now building post-quantum cryptography products at QNu Labs and multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles.",
+  description: `Abhishek Satyam — Senior Software Engineer, Full-Stack (Frontend-Heavy). ${yearsExperience} years shipping scalable, high-performance React, Next.js & TypeScript apps end-to-end, now building post-quantum cryptography products at QNu Labs and multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles.`,
 };
 
 export const nav: NavLink[] = [
@@ -88,12 +115,11 @@ export const hero = {
   // Oversized gradient statement under the name.
   statement: ["Building software that scales from", "pixels to production."],
   // Short, scannable intro for the hero.
-  intro:
-    "Frontend-heavy full-stack engineer with 7 years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs — and RAG systems on Postgres + pgvector on my own time.",
+  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs — and RAG systems on Postgres + pgvector on my own time.`,
   primaryCta: { label: "View work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   stats: [
-    { value: "7 yrs", label: "shipping production web apps" },
+    { value: `${yearsExperience} yrs`, label: "shipping production web apps" },
     { value: "up to 50%", label: "Core Web Vitals improvement" },
     { value: "22% → 72%", label: "test coverage lifted" },
   ],
@@ -103,7 +129,7 @@ export const about = {
   eyebrow: "// about",
   title: "Frontend-deep, full-stack wide.",
   paragraphs: [
-    "Full-stack engineer with a frontend-heavy focus and 7 years building and shipping scalable, high-performance web applications end-to-end. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.",
+    `Full-stack engineer with a frontend-heavy focus and ${yearsExperience} years building and shipping scalable, high-performance web applications end-to-end. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.`,
     "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of leading engineering teams, building products from the ground up, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
     "Recent focus: Generative AI — designing multi-tenant RAG / LLM systems on PostgreSQL + pgvector, from the ingestion pipeline through vector search to citation-grounded token streaming.",
   ],
@@ -119,6 +145,15 @@ export const about = {
   glance: {
     openTo: "Senior / Lead — frontend & full-stack, at product companies",
   },
+};
+
+/**
+ * Lives here rather than inline in Experience.tsx because the title quotes the
+ * derived year count — the one section heading that can go stale on its own.
+ */
+export const experienceSection = {
+  eyebrow: "// experience",
+  title: `${yearsWord} years, shipped end-to-end.`,
 };
 
 export const experience: Role[] = [
@@ -409,7 +444,7 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "State Management",
-    items: ["Redux Toolkit", "Redux", "React Context", "Valtio"],
+    items: ["Redux Toolkit", "React Context", "Valtio"],
   },
   {
     label: "UI & Styling",
@@ -493,7 +528,7 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Build Tools",
-    items: ["Webpack", "Vite", "Babel", "npm", "Yarn", "Parcel"],
+    items: ["Webpack", "Vite", "Babel", "PNPM", "npm"],
   },
   {
     label: "Developer Tooling",

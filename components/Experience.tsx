@@ -1,4 +1,4 @@
-import { experience } from "@/content";
+import { experience, experienceSection } from "@/content";
 import { Section } from "@/components/Section";
 import { SectionHeading, Tag } from "@/components/primitives";
 import { Aurora } from "@/components/Aurora";
@@ -43,8 +43,8 @@ export function Experience() {
 
       <SectionHeading
         id="experience-title"
-        eyebrow="// experience"
-        title="Seven years, shipped end-to-end."
+        eyebrow={experienceSection.eyebrow}
+        title={experienceSection.title}
       />
 
       <div className="relative mt-14">

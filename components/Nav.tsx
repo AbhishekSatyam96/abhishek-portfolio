@@ -121,7 +121,7 @@ export function Nav() {
             rel="noopener noreferrer"
             className="rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-fg transition-colors hover:border-white/20 hover:bg-white/[0.06]"
           >
-            Résumé
+            Resume
           </a>
           <a
             href="#contact"
@@ -188,7 +188,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="flex-1 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2.5 text-center text-sm text-fg"
             >
-              Résumé
+              Resume
             </a>
             <a
               href="#contact"

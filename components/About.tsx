@@ -112,7 +112,7 @@ export function About() {
             {/* Pinned to the card's bottom: the three things a recruiter clicks. */}
             <div className="mt-auto flex flex-wrap gap-2 pt-8">
               {[
-                { label: "Résumé", href: site.resumeUrl },
+                { label: "Resume", href: site.resumeUrl },
                 { label: "LinkedIn", href: site.linkedin },
                 { label: "GitHub", href: site.github },
               ].map((l) => (

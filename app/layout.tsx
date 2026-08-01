@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import { coreStack, education, experience, site } from "@/content";
+import { achievements, coreStack, education, experience, site } from "@/content";
 import { GrainOverlay } from "@/components/GrainOverlay";
 
 // Body. Variable font, self-hosted, no layout shift.
@@ -100,6 +100,7 @@ const personJsonLd = {
     addressCountry: "IN",
   },
   knowsAbout: coreStack,
+  award: achievements,
 };
 
 export default function RootLayout({

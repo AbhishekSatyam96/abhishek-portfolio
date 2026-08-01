@@ -61,6 +61,10 @@ export function LatticeField({ className = "" }: { className?: string }) {
 
     let raf = 0;
     let running = false;
+    // The lattice lives in the hero, which is off-screen for most of the page.
+    // Without this the rAF loop keeps redrawing the whole field behind all five
+    // sections below it, and every pointer move keeps forcing a layout.
+    let onScreen = true;
     const start = performance.now();
 
     // Deterministic pseudo-random so the lattice is stable across rebuilds.
@@ -225,6 +229,9 @@ export function LatticeField({ className = "" }: { className?: string }) {
 
     // --- pointer (window-level, since the canvas is pointer-events: none) ---
     function onPointerMove(e: PointerEvent) {
+      // Bail before the getBoundingClientRect: this fires for every pointer move
+      // anywhere on the page, and the read forces a layout each time.
+      if (!onScreen) return;
       const rect = canvas.getBoundingClientRect();
       pointerX = e.clientX - rect.left;
       pointerY = e.clientY - rect.top;
@@ -240,9 +247,10 @@ export function LatticeField({ className = "" }: { className?: string }) {
       pointerActive = false;
     }
 
-    function onVisibility() {
-      if (document.hidden) stop();
-      else play();
+    /** Animate only while on screen, in a foreground tab, with motion allowed. */
+    function sync() {
+      if (onScreen && !document.hidden && !reduceMq.matches) play();
+      else stop();
     }
 
     function onReduceChange() {
@@ -251,7 +259,7 @@ export function LatticeField({ className = "" }: { className?: string }) {
         stop();
         draw(performance.now()); // one static frame
       } else {
-        play();
+        sync();
       }
     }
 
@@ -263,6 +271,18 @@ export function LatticeField({ className = "" }: { className?: string }) {
     });
     if (canvas.parentElement) ro.observe(canvas.parentElement);
 
+    // A margin so the field is already animating by the time it scrolls in,
+    // rather than popping to life at the viewport edge.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (!onScreen) pointerActive = false;
+        sync();
+      },
+      { rootMargin: "150px" },
+    );
+    io.observe(canvas);
+
     if (reduceMq.matches) {
       draw(performance.now());
     } else {
@@ -270,15 +290,16 @@ export function LatticeField({ className = "" }: { className?: string }) {
       document.addEventListener("pointerleave", onPointerLeave);
       play();
     }
-    document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener("visibilitychange", sync);
     reduceMq.addEventListener("change", onReduceChange);
 
     return () => {
       stop();
       ro.disconnect();
+      io.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerleave", onPointerLeave);
-      document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("visibilitychange", sync);
       reduceMq.removeEventListener("change", onReduceChange);
     };
   }, []);

@@ -99,16 +99,22 @@ export function Hero() {
             className="reveal mt-12 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/8 sm:grid-cols-3"
           >
             {hero.stats.map((s) => (
-              <div key={s.label} className="bg-white/[0.02] p-5">
-                <dt className="sr-only">{s.label}</dt>
+              // col-reverse: the term has to precede its definition in the DOM,
+              // but reads better under the number. Previously the label sat in
+              // both an sr-only <dt> and a visible <span>, so screen readers
+              // announced it twice.
+              <div
+                key={s.label}
+                className="flex flex-col-reverse bg-white/[0.02] p-5"
+              >
+                <dt className="mt-1 text-xs leading-snug text-muted">
+                  {s.label}
+                </dt>
                 <dd>
                   <CountUp
                     value={s.value}
                     className="block font-display text-2xl font-semibold tracking-tight text-gradient sm:text-3xl"
                   />
-                  <span className="mt-1 block text-xs leading-snug text-muted">
-                    {s.label}
-                  </span>
                 </dd>
               </div>
             ))}

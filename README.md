@@ -41,9 +41,9 @@ metrics, skills, projects and SEO text are there — edit it, not the components
 
 | What | Where |
 | ---- | ----- |
-| Résumé PDF | `public/resume.pdf`, served at `/resume` via the rewrite in `next.config.ts`. Replace the file whenever you update the résumé — the Nav, Contact and About links all point at it. |
+| Resume PDF | `public/resume.pdf`, served at `/resume` via the rewrite in `next.config.ts`. Replace the file whenever you update the Resume — the Nav, Contact and About links all point at it. |
 | Canonical + OG URL | `content.ts` → `site.url`, overridden by `NEXT_PUBLIC_SITE_URL` **at build time**. If this doesn't match the domain you actually serve, the generated OG image 404s and every shared link loses its preview card. |
-| Résumé metrics | Numbers in `content.ts` are transcribed from the résumé verbatim. Change them in both places or not at all. |
+| Resume metrics | Numbers in `content.ts` are transcribed from the Resume verbatim. Change them in both places or not at all. |
 
 ## Project structure
 
