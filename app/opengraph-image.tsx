@@ -44,7 +44,7 @@ export default function OgImage() {
               color: "#22D3EE",
             }}
           >
-            Post-quantum cryptography
+            React · Next.js · TypeScript · Node.js
           </div>
         </div>
 
@@ -91,15 +91,23 @@ export default function OgImage() {
               </div>
             </div>
           ))}
+          {/* Stacked rather than inline: the three stat cards leave roughly
+              270px here, and "Bengaluru · Available immediately" on one line
+              overflows that and squeezes the cards. */}
           <div
             style={{
               display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
               marginLeft: "auto",
-              fontSize: 24,
+              fontSize: 20,
               color: "#9AA6BD",
             }}
           >
-            {site.location}
+            <div style={{ display: "flex" }}>{site.location}</div>
+            <div style={{ display: "flex", marginTop: 4, color: "#22D3EE" }}>
+              Available immediately
+            </div>
           </div>
         </div>
       </div>

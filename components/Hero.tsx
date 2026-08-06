@@ -80,16 +80,22 @@ export function Hero() {
             </Magnetic>
           </m.div>
 
+          {/* Availability pill. Carries notice period and relocation alongside
+              the role and city — the four things a recruiter would otherwise
+              spend a screening call establishing. rounded-2xl rather than
+              rounded-full because the copy wraps to two lines on narrow
+              viewports, and a wrapped pill with fully round ends reads broken. */}
           <m.div
             variants={item}
-            className="reveal mt-8 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5"
+            className="reveal mt-8 inline-flex max-w-full items-start gap-2.5 rounded-2xl border border-white/10 bg-white/[0.03] px-3.5 py-2"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative mt-[0.3rem] flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <span className="font-mono text-xs text-muted">
-              {site.availability} · {site.location}
+            <span className="font-mono text-xs leading-relaxed text-muted">
+              {site.availability} · {site.location} ·{" "}
+              <span className="text-fg/90">{site.availabilityDetail}</span>
             </span>
           </m.div>
 

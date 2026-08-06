@@ -105,6 +105,9 @@ export function About() {
                 <dd className="mt-1 text-fg">
                   {about.glance.openTo}
                   <span className="block text-muted">{site.location}</span>
+                  <span className="mt-1.5 block font-medium text-accent">
+                    {about.glance.availability}
+                  </span>
                 </dd>
               </div>
             </dl>

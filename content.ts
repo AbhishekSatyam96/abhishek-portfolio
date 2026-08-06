@@ -84,6 +84,13 @@ export const site = {
   positioning: "Full-Stack (Frontend-Heavy)",
   location: "Bengaluru, India",
   availability: "Open to Senior / Lead roles",
+  /**
+   * Rendered beside `availability` in the hero pill, the About glance card and
+   * the OG image. Notice period and relocation are the two things an India-market
+   * recruiter screens for on the first call — stating them up front removes that
+   * call rather than costing one, and filters out the roles that can't wait.
+   */
+  availabilityDetail: "Available immediately · open to relocation",
   email: "abhishek.satyam96@gmail.com",
   phone: "+91 9915121582",
   // Live links
@@ -98,7 +105,18 @@ export const site = {
   resumeUrl: "/resume",
   // Used as metadataBase / canonical. Override with NEXT_PUBLIC_SITE_URL at build.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhisheksatyam.com",
-  description: `Abhishek Satyam — Senior Software Engineer, Full-Stack (Frontend-Heavy). ${yearsExperience} years shipping scalable, high-performance React, Next.js & TypeScript apps end-to-end, now building post-quantum cryptography products at QNu Labs and multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles.`,
+  /**
+   * Title tag. Carries the stack and the city rather than just the job title:
+   * almost nobody searches "Abhishek Satyam" cold — they search the role, the
+   * framework and the location, and this is the one string Google weights most.
+   */
+  seoTitle: `Abhishek Satyam — Senior Software Engineer · React, Next.js & TypeScript · Bengaluru`,
+  /**
+   * Front-loaded on purpose: Google truncates around 160 characters, so the
+   * role, the stack, the years and the city all land before the cut. The tail
+   * still earns its place in the OG/Twitter cards, which don't truncate.
+   */
+  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles — available immediately, open to relocation.`,
 };
 
 export const nav: NavLink[] = [
@@ -110,18 +128,34 @@ export const nav: NavLink[] = [
 ];
 
 export const hero = {
-  eyebrow: "// senior software engineer · post-quantum cryptography",
+  /**
+   * Leads with the stack, not the domain. Post-quantum cryptography is a strong
+   * credential but a narrow headline — a recruiter staffing a senior React role
+   * reads a crypto-first eyebrow as "specialist, wrong fit" and moves on. The
+   * domain still lands three lines down, where it reads as proof instead of a
+   * filter.
+   */
+  eyebrow: "// senior software engineer · react · next.js · typescript",
   roleLine: "Senior Software Engineer · Full-Stack (Frontend-Heavy)",
   // Oversized gradient statement under the name.
   statement: ["Building software that scales from", "pixels to production."],
   // Short, scannable intro for the hero.
-  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end. Today I build the interfaces for post-quantum cryptography at QNu Labs — and RAG systems on Postgres + pgvector on my own time.`,
+  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end — React, Next.js, TypeScript, Node.js. I've led a 6-engineer team and owned delivery for products serving 50+ enterprise clients. Currently at QNu Labs, building the interfaces for post-quantum cryptography.`,
   primaryCta: { label: "View work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
+  /**
+   * Three different readers, one each: years qualifies you past the filter,
+   * team size qualifies you for the Lead half of the target, and the perf
+   * number is the craft signal for the hiring manager who reads further.
+   *
+   * Test coverage (22% → 72%) used to sit here and now lives in the About
+   * highlights — a real number, but one that means nothing to a non-engineer
+   * screening the page in fifteen seconds.
+   */
   stats: [
     { value: `${yearsExperience} yrs`, label: "shipping production web apps" },
+    { value: "6", label: "engineers led" },
     { value: "up to 50%", label: "Core Web Vitals improvement" },
-    { value: "22% → 72%", label: "test coverage lifted" },
   ],
 };
 
@@ -137,13 +171,14 @@ export const about = {
     "End-to-end ownership: system design → testing → deploy → production ops",
     "Core Web Vitals improved by up to 50%; Lighthouse held at 90+",
     "Test coverage lifted from 22% to 72% across U.S. & Australian markets",
-    "Led engineering teams and built products from the ground up",
+    "Led a 6-engineer team across 12+ releases, serving 50+ enterprise clients",
     "Gen AI: multi-tenant RAG on PostgreSQL + pgvector, built end-to-end",
     "40+ reusable components architected, cutting feature-development time ~35%",
   ],
   /** Right-hand "at a glance" card — the scannable version for a recruiter. */
   glance: {
     openTo: "Senior / Lead — frontend & full-stack, at product companies",
+    availability: site.availabilityDetail,
   },
 };
 
@@ -560,7 +595,13 @@ export const achievements = [
 export const contact = {
   eyebrow: "// contact",
   title: "Let's build something worth trusting.",
-  body: "I'm open to Senior / Lead frontend and full-stack roles at strong product companies.",
+  /**
+   * States the two things that otherwise cost a screening call — notice period
+   * and relocation — and ends on a reply commitment. The commitment is the line
+   * that actually converts a browsing recruiter into a message, so it only works
+   * if it stays true; drop the last sentence rather than let it go stale.
+   */
+  body: "Open to Senior / Lead frontend and full-stack roles at product companies — available immediately, and open to relocation. Email or call directly; I reply within a day.",
   email: site.email,
   phone: site.phone,
 };
