@@ -271,12 +271,13 @@ export const projects: Project[] = [
   {
     name: "RAG Knowledge Assistant",
     kind: "featured",
-    tagline: "Live · Postgres + pgvector · streaming",
+    tagline: "Live · Postgres + pgvector · streaming · voice",
     description:
       "Answers questions over your own documents, with citations. An Express + TypeScript API handles " +
       "ingestion and retrieval, Postgres with pgvector serves approximate-nearest-neighbour search " +
       "over an HNSW index, and a Next.js frontend streams grounded answers — cited down to the PDF " +
-      "page — or refuses when the corpus can't support one.",
+      "page — or refuses when the corpus can't support one. Ask one question or hold a thread; " +
+      "type it or speak it.",
     role: "Full-stack — API, data model, retrieval pipeline & frontend",
     notes: [
       {
@@ -287,7 +288,7 @@ export const projects: Project[] = [
       {
         label: "Tenant isolation in raw SQL",
         detail:
-          "One shared index plus an ownership predicate, where the ORM's types don't reach. pgvector 0.8 iterative scan (strict_order) keeps post-filtering from silently returning fewer than top-k, with recall tuned per request via transaction-scoped SET LOCAL.",
+          "One shared index plus an ownership predicate, where the ORM's types don't reach. pgvector 0.8 iterative scan (strict_order) keeps post-filtering from silently returning fewer than top-k, and ef_search is raised with SET LOCAL — scoped to the transaction, because a plain SET leaks one request's tuning into whoever gets that pooled connection next.",
       },
       {
         label: "NDJSON streaming, not SSE",
@@ -295,14 +296,24 @@ export const projects: Project[] = [
           "EventSource can't send a Bearer header. Citations go out ahead of the first token, so the answer renders already grounded.",
       },
       {
-        label: "Page-aware ingestion",
+        label: "Rewrite drives retrieval, not generation",
         detail:
-          'SHA-256 dedupe → page-aware chunking, so PDF citations read "page 7" rather than "chunk 12" → embeddings batched 100/request, behind a PENDING→READY state machine.',
+          'A follow-up is rewritten into a standalone question before it is embedded — "how long is it?" retrieves nothing on its own. Generation still answers what the user actually typed, because answering the rewrite answers a question nobody asked. "Make that shorter" skips retrieval entirely and re-grounds on the previous turn\'s sources.',
       },
       {
-        label: "Cost control on the expensive route",
+        label: "Page-aware ingestion",
         detail:
-          "Redis-backed rate limits that survive autoscaling, a per-user in-flight cap on streams, and client disconnects propagated to OpenAI via AbortController.",
+          'SHA-256 dedupe → chunked one page at a time, so no chunk straddles a page break and every citation has one honest page to point at: "page 7" rather than "chunk 12" → embeddings batched 100/request, behind a PENDING→READY state machine.',
+      },
+      {
+        label: "Voice is an adapter, not a third path",
+        detail:
+          "A transcript lands in the composer, so the request that follows is byte-identical to a typed one — retrieval can't tell which you used, and a mishearing stays a visible typo instead of a silent retrieval failure. Paid model in, browser speechSynthesis out: spend where an error changes the result.",
+      },
+      {
+        label: "Cost control on the paid routes",
+        detail:
+          "Redis-backed rate limits that survive autoscaling, one shared in-flight cap across both answer routes (three separate limits of 2 is a limit of 6), and client disconnects propagated to OpenAI via AbortController. Transcription gets its own limiters — it bills by the minute, so counting requests bounds nothing.",
       },
     ],
     stack: [
@@ -330,7 +341,8 @@ export const projects: Project[] = [
     pipeline: {
       title: "retrieval pipeline",
       steps: [
-        { label: "Question", tech: "Next.js UI" },
+        { label: "Question", tech: "typed or spoken" },
+        { label: "Rewrite", tech: "if follow-up" },
         { label: "Embed", tech: "OpenAI · 1536-d" },
         { label: "ANN search", tech: "pgvector · HNSW" },
         { label: "Generation", tech: "temp 0 · grounded" },
