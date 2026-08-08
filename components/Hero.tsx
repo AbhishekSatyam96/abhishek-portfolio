@@ -93,10 +93,10 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <span className="font-mono text-xs leading-relaxed text-muted">
+            {/* <span className="font-mono text-xs leading-relaxed text-muted">
               {site.availability} · {site.location} ·{" "}
               <span className="text-fg/90">{site.availabilityDetail}</span>
-            </span>
+            </span> */}
           </m.div>
 
           {/* Scannable proof points */}

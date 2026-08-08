@@ -119,7 +119,7 @@ const personJsonLd = {
     "@type": "Demand",
     name: site.availability,
     availability: "https://schema.org/InStock",
-    description: site.availabilityDetail,
+    // description: site.availabilityDetail,
   },
   email: `mailto:${site.email}`,
   telephone: site.phone,
