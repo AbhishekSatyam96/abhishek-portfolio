@@ -90,7 +90,7 @@ export const site = {
    * recruiter screens for on the first call — stating them up front removes that
    * call rather than costing one, and filters out the roles that can't wait.
    */
-  availabilityDetail: "Available immediately · open to relocation",
+  // availabilityDetail: "Available immediately · open to relocation",
   email: "abhishek.satyam96@gmail.com",
   phone: "+91 9915121582",
   // Live links
@@ -178,7 +178,7 @@ export const about = {
   /** Right-hand "at a glance" card — the scannable version for a recruiter. */
   glance: {
     openTo: "Senior / Lead — frontend & full-stack, at product companies",
-    availability: site.availabilityDetail,
+    // availability: site.availabilityDetail,
   },
 };
 

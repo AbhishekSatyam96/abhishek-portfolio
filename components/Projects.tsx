@@ -3,6 +3,7 @@ import { Section } from "@/components/Section";
 import { SectionHeading, Tag } from "@/components/primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { PipelineVisual } from "@/components/PipelineVisual";
+import { EngineeringNotes } from "@/components/EngineeringNotes";
 import { GradientButton, GhostButton } from "@/components/GradientButton";
 import { Magnetic } from "@/components/Magnetic";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -21,35 +22,6 @@ function ImpactList({ items }: { items: string[] }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-/**
- * The featured card's engineering deep-dive. Each note is a decision headline
- * plus the reasoning, so the card can be skimmed by headline alone.
- *
- * CSS columns rather than a grid: notes of uneven length pack into balanced
- * columns with no orphaned cell, and collapse to one column on small screens
- * for free. `break-inside-avoid` keeps a note from splitting.
- */
-function EngineeringNotes({ notes }: { notes: { label: string; detail: string }[] }) {
-  return (
-    <ol className="gap-x-10 sm:columns-2">
-      {notes.map((n, i) => (
-        <li
-          key={n.label}
-          className="mb-5 break-inside-avoid border-t border-white/8 pt-4 last:mb-0"
-        >
-          <div className="flex items-baseline gap-2.5">
-            <span aria-hidden="true" className="font-mono text-[0.7rem] text-primary/70">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h4 className="text-sm font-semibold text-fg">{n.label}</h4>
-          </div>
-          <p className="mt-1.5 pl-[1.9rem] text-sm leading-relaxed text-muted">{n.detail}</p>
-        </li>
-      ))}
-    </ol>
   );
 }
 
@@ -151,14 +123,11 @@ export function Projects() {
                     </div>
                   </div>
 
-                  {/* Deep-dive runs the full card width: at five paragraphs it
-                      was what made this card taller than the viewport when
-                      confined to a 3/5 column. */}
+                  {/* Deep-dive runs the full card width — it needs the room for
+                      its two-pane browser, and rendering one note at a time is
+                      what keeps this card from outgrowing the viewport. */}
                   {p.notes && p.notes.length > 0 && (
-                    <div className="mt-7 border-t border-white/8 pt-6">
-                      <p className="mb-4 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-accent">
-                        Engineering notes
-                      </p>
+                    <div className="mt-7">
                       <EngineeringNotes notes={p.notes} />
                     </div>
                   )}
