@@ -64,7 +64,7 @@ export function Skills() {
         </div>
       </Reveal>
 
-      {/* Six disciplines instead of a flat wall of fourteen cards.
+      {/* Six disciplines instead of a flat wall of fifteen cards.
           CSS columns rather than a grid: the domains differ a lot in item count,
           and equal-height grid rows left the shorter card in each pair with a
           block of dead space. Columns pack them by height instead. */}

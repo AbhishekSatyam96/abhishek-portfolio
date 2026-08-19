@@ -152,7 +152,12 @@ export function Projects() {
         <span className="hairline flex-1" />
       </div>
 
-      <Stagger className="mt-5 grid gap-6 sm:grid-cols-2" stagger={0.1}>
+      {/* Three NDA cards: two columns from sm, three from lg — at sm/md widths a
+          third column squeezes the impact bullets to two words a line. */}
+      <Stagger
+        className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        stagger={0.1}
+      >
         {privateProjects.map((p) => (
           <StaggerItem key={p.name} className="h-full">
             <SpotlightCard
@@ -197,8 +202,8 @@ export function Projects() {
                 ))}
               </div>
 
-              {/* mt-auto so the note sits on the card's floor — the two cards
-                  carry different amounts of copy and would otherwise ragged. */}
+              {/* mt-auto so the note sits on the card's floor — the cards carry
+                  different amounts of copy and would otherwise ragged. */}
               <p className="mt-auto border-t border-white/8 pt-4 font-mono text-xs text-muted">
                 Architecture &amp; live links withheld under NDA — happy to walk through it in a call.
               </p>

@@ -116,7 +116,7 @@ export const site = {
    * role, the stack, the years and the city all land before the cut. The tail
    * still earns its place in the OG/Twitter cards, which don't truncate.
    */
-  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles — available immediately, open to relocation.`,
+  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, launched 3 production products from scratch, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles — available immediately, open to relocation.`,
 };
 
 export const nav: NavLink[] = [
@@ -135,12 +135,13 @@ export const hero = {
    * domain still lands three lines down, where it reads as proof instead of a
    * filter.
    */
-  eyebrow: "// senior software engineer · react · next.js · typescript",
+  eyebrow:
+    "// senior software engineer · react · next.js · typescript · node.js · gen ai",
   roleLine: "Senior Software Engineer · Full-Stack (Frontend-Heavy)",
   // Oversized gradient statement under the name.
   statement: ["Building software that scales from", "pixels to production."],
   // Short, scannable intro for the hero.
-  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end — React, Next.js, TypeScript, Node.js. I've led a 6-engineer team and owned delivery for products serving 50+ enterprise clients. Currently at QNu Labs, building the interfaces for post-quantum cryptography.`,
+  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end — React, Next.js, TypeScript, Node.js. I've led a 6-engineer team and owned delivery for products serving 50+ enterprise clients. Currently at QNu Labs, where I've built and launched 3 production products for post-quantum cryptography and quantum-safe key management.`,
   primaryCta: { label: "View work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   /**
@@ -163,17 +164,19 @@ export const about = {
   eyebrow: "// about",
   title: "Frontend-deep, full-stack wide.",
   paragraphs: [
-    `Full-stack engineer with a frontend-heavy focus and ${yearsExperience} years building and shipping scalable, high-performance web applications end-to-end. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.`,
-    "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of leading engineering teams, building products from the ground up, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
-    "Recent focus: Generative AI — designing multi-tenant RAG / LLM systems on PostgreSQL + pgvector, from the ingestion pipeline through vector search to citation-grounded token streaming.",
+    `Full-stack engineer with a frontend-heavy focus and ${yearsExperience} years building and scaling production web applications across frontend architecture, backend and API integration, databases, and cloud deployments. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.`,
+    "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of building enterprise products from scratch, leading engineering teams, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
+    "Recent focus: Generative AI — designing multi-tenant RAG / LLM systems on PostgreSQL + pgvector with LangChain and the OpenAI API, from the ingestion pipeline through vector search to citation-grounded token streaming.",
   ],
   highlights: [
     "End-to-end ownership: system design → testing → deploy → production ops",
+    "3 production web products launched from the ground up at QNu Labs",
     "Core Web Vitals improved by up to 50%; Lighthouse held at 90+",
     "Test coverage lifted from 22% to 72% across U.S. & Australian markets",
     "Led a 6-engineer team across 12+ releases, serving 50+ enterprise clients",
-    "Gen AI: multi-tenant RAG on PostgreSQL + pgvector, built end-to-end",
     "40+ reusable components architected, cutting feature-development time ~35%",
+    "Gen AI: multi-tenant RAG on PostgreSQL + pgvector, built end-to-end",
+    "Jira Cloud analytics platform built and adopted for leadership reporting",
   ],
   /** Right-hand "at a glance" card — the scannable version for a recruiter. */
   glance: {
@@ -196,21 +199,23 @@ export const experience: Role[] = [
     company: "QNu Labs",
     title: "Senior Software Engineer",
     period: "March 2025 – Present",
-    context: "Post-quantum cryptography · Bengaluru",
+    context: "Post-quantum cryptography & key management · Bengaluru",
     current: true,
     bullets: [
-      "Own the full software development lifecycle for 3 web products built in React, Next.js, and TypeScript — from system design and implementation through testing, deployment, and production operations.",
-      "Build and own Dockerized GitLab CI/CD pipelines and GCP deployments, standardizing build, test, and release workflows across all 3 products.",
-      "Architected reusable component and design systems adopted across all 3 products, accelerating feature delivery and enforcing UI consistency.",
-      "Improved Core Web Vitals across key pages — reduced LCP from 3.8s to 1.9s, brought CLS below 0.1, and held Lighthouse performance at 90+.",
-      "Established code-review and unit-test standards (75%+ coverage) and integrated automated regression testing into CI, reducing recurring production defects and improving release reliability.",
-      "Mentor engineers through structured code reviews and pair programming, and partner with backend, product, and QA teams to ship reliable releases monitored via Sentry.",
+      "Built and launched 3 production web products from the ground up — QVault, QKMS, and an engineering analytics platform — owning application architecture, repository setup, tooling, API integration, testing, and deployment within a 6-engineer product team.",
+      "Designed and delivered QKMS, an enterprise key-management platform supporting multi-role authentication, key-profile management, and secure operational workflows for cryptographic key administration.",
+      "Designed the API integration architecture for enterprise workflows — defining data contracts, handling asynchronous operations and failure states, and integrating backend services across authentication, key management, and reporting.",
+      "Built an engineering analytics platform on the Jira Cloud REST APIs, designing JQL-based data retrieval, pagination handling, changelog aggregation, data transformation, and reporting pipelines to surface team activity and delivery-throughput metrics; adopted for leadership reporting.",
+      "Own Dockerized GitLab CI/CD pipelines and GCP deployments, standardizing build, test, release, and production deployment workflows across all 3 products.",
+      "Established unit-testing and code-review standards, reaching 75%+ coverage with Jest and React Testing Library and integrating automated regression testing into CI.",
+      "Improved application performance and reliability through Core Web Vitals optimization — LCP reduced from 3.8s to 1.9s, CLS held below 0.1, and 90+ Lighthouse performance sustained, with releases monitored in production via Sentry.",
     ],
     tags: [
       "Next.js",
       "React",
       "Node.js",
       "TypeScript",
+      "Jira Cloud API",
       "Docker",
       "GitLab CI/CD",
       "GCP",
@@ -221,18 +226,25 @@ export const experience: Role[] = [
     company: "AntWalk",
     title: "Senior Software Engineer",
     period: "July 2020 – March 2025",
-    // Two different scopes, so both numbers are spelled out: 150+ is the company's
-    // client base, the 50+ in the bullet below is what my team's platform served.
-    context: "Enterprise SaaS · 150+ clients companywide",
+    context: "Enterprise learning & capability-building SaaS",
     bullets: [
+      "Led and mentored a 6-engineer team, building 2 web applications from scratch including the core SaaS platform serving 50+ enterprise clients — owning system design, implementation, testing, and deployment across 12+ major releases.",
       "Architected a library of 40+ reusable React, Next.js, and TypeScript components, cutting feature-development time ~35% and ensuring design consistency across the product.",
-      "Led a 6-engineer team building the core SaaS platform for 50+ enterprise clients, owning system design, implementation, testing, and deployment across 12+ major releases.",
-      "Defined and integrated API contracts for 20+ endpoints with backend teams, reducing integration bugs ~25% through contract-driven development and shared OpenAPI documentation.",
+      "Defined and integrated API contracts for 20+ endpoints (REST and GraphQL via Apollo Client) with backend teams, reducing integration bugs ~25% through contract-driven development and shared OpenAPI documentation.",
       "Optimized performance via lazy loading, critical CSS extraction, and WebP/AVIF image optimization, reducing average page load time ~40% and improving Lighthouse score from 62 to 88.",
       "Increased unit-test coverage from 22% to 72% (Jest, React Testing Library) and ran 500+ code reviews, establishing engineering standards adopted across the team.",
       "Built feature-flag (LaunchDarkly, Split) and A/B-testing frameworks across 8+ experiments, enabling data-driven product decisions.",
     ],
-    tags: ["React", "Next.js", "TypeScript", "OpenAPI", "LaunchDarkly", "Jest"],
+    tags: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "GraphQL",
+      "Apollo Client",
+      "OpenAPI",
+      "LaunchDarkly",
+      "Jest",
+    ],
   },
   {
     company: "AntWalk",
@@ -383,11 +395,12 @@ export const projects: Project[] = [
     kind: "private",
     tagline: "Quantum key management · QNu Labs",
     description:
-      "An enterprise quantum-safe key-management product. I own the delivery pipeline and the interface engineering end-to-end.",
+      "An enterprise quantum-safe key-management platform, designed and delivered from the ground up — multi-role authentication, key-profile management, and secure operational workflows for cryptographic key administration.",
     role: "Senior Software Engineer — full-stack delivery & release engineering",
     impact: [
+      "Multi-role authentication and key-profile management workflows",
+      "API integration architecture: data contracts, async operations, failure states",
       "Dockerized GitLab CI/CD pipelines and GCP deployments standardizing releases",
-      "Shared design-system primitives enforcing UI consistency",
       "Reliable releases monitored in production via Sentry",
     ],
     stack: [
@@ -415,6 +428,28 @@ export const projects: Project[] = [
     stack: ["React", "Next.js", "TypeScript", "Node.js", "Docker", "GCP"],
     badge: "Enterprise · private",
   },
+  {
+    name: "Engineering Analytics Platform",
+    kind: "private",
+    tagline: "Jira Cloud delivery analytics · QNu Labs",
+    description:
+      "An internal analytics platform built on the Jira Cloud REST APIs, turning raw issues and changelogs into team-activity and delivery-throughput reporting. Adopted for leadership reporting.",
+    role: "Senior Software Engineer — data retrieval, transformation & reporting UI",
+    impact: [
+      "JQL-based data retrieval with pagination handling across Jira Cloud REST APIs",
+      "Changelog aggregation and transformation pipelines for throughput metrics",
+      "Team-activity and delivery reporting adopted for leadership reviews",
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Jira Cloud REST API",
+      "Docker",
+      "GCP",
+    ],
+    badge: "Enterprise · private",
+  },
 ];
 
 /** Headline technologies shown in the Skills marquee strip. */
@@ -426,6 +461,7 @@ export const coreStack = [
   "PostgreSQL",
   "pgvector",
   "RAG / LLM",
+  "LangChain",
   "GraphQL",
   "Tailwind CSS",
   "Docker",
@@ -438,7 +474,7 @@ export const coreStack = [
 /**
  * Presentation grouping for the Skills section: each domain collects skill
  * groups (by label) into one card so the section reads as six disciplines
- * instead of a flat wall of fourteen cards.
+ * instead of a flat wall of fifteen cards.
  *
  * Cards flow into CSS columns (see Skills.tsx), so uneven domain sizes pack
  * rather than leaving dead space — no need to balance adjacent pairs by hand.
@@ -455,8 +491,8 @@ export const skillDomains: { label: string; groups: string[] }[] = [
     ],
   },
   {
-    label: "Backend & Data",
-    groups: ["Backend & APIs", "Databases"],
+    label: "Backend, Data & Security",
+    groups: ["Backend & APIs", "Databases", "Security & Access"],
   },
   {
     // Architecture rides here rather than under Backend: half its items are
@@ -497,6 +533,7 @@ export const skills: SkillGroup[] = [
     label: "UI & Styling",
     items: [
       "Tailwind CSS",
+      "shadcn/ui",
       "Styled Components",
       "Ant Design",
       "HTML5 Canvas",
@@ -524,6 +561,7 @@ export const skills: SkillGroup[] = [
       "GraphQL",
       "Apollo Client",
       "OpenAPI",
+      "API Contract Design",
       "Contract-Driven Integration",
       "NDJSON / SSE Streaming",
     ],
@@ -541,14 +579,25 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    label: "Security & Access",
+    items: [
+      "Authentication",
+      "Role-Based Access Control",
+      "Enterprise Security Workflows",
+    ],
+  },
+  {
     label: "Gen AI / LLM",
     items: [
       "Generative AI",
       "RAG",
+      "LangChain",
       "OpenAI API",
       "Embeddings",
       "Vector Search (HNSW, IVFFlat)",
       "Chunking Strategies",
+      "Context Retrieval",
+      "Prompt Engineering",
       "Token Streaming",
       "Citation Grounding",
     ],
@@ -560,6 +609,7 @@ export const skills: SkillGroup[] = [
       "Lighthouse",
       "PageSpeed Insights",
       "Critical CSS",
+      "Code Splitting",
       "Lazy Loading",
       "Image Optimization (WebP, AVIF)",
       "Sentry",
@@ -567,7 +617,13 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Testing",
-    items: ["Jest", "React Testing Library", "Integration Testing", "TDD"],
+    items: [
+      "Jest",
+      "React Testing Library",
+      "Integration Testing",
+      "Automated Regression Testing",
+      "TDD",
+    ],
   },
   {
     label: "DevOps & Cloud",

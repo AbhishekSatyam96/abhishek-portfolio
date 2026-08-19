@@ -58,7 +58,8 @@ export function About() {
                 <dd className="mt-1 text-fg">
                   Senior Software Engineer, QNu Labs
                   <span className="block text-muted">
-                    Post-quantum cryptography · {site.location}
+                    Post-quantum cryptography &amp; key management ·{" "}
+                    {site.location}
                   </span>
                 </dd>
               </div>
