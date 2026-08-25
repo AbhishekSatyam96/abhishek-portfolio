@@ -116,7 +116,7 @@ export const site = {
    * role, the stack, the years and the city all land before the cut. The tail
    * still earns its place in the OG/Twitter cards, which don't truncate.
    */
-  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, launched 3 production products from scratch, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building multi-tenant RAG / LLM systems on PostgreSQL + pgvector. Open to Senior / Lead roles — available immediately, open to relocation.`,
+  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, launched 3 production products from scratch, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building RAG / LLM retrieval systems on PostgreSQL + pgvector — multi-tenant document QA and repository-aware code search, measured with a Recall@k / MRR evaluation harness. Open to Senior / Lead roles — available immediately, open to relocation.`,
 };
 
 export const nav: NavLink[] = [
@@ -166,7 +166,7 @@ export const about = {
   paragraphs: [
     `Full-stack engineer with a frontend-heavy focus and ${yearsExperience} years building and scaling production web applications across frontend architecture, backend and API integration, databases, and cloud deployments. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.`,
     "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of building enterprise products from scratch, leading engineering teams, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
-    "Recent focus: Generative AI — designing multi-tenant RAG / LLM systems on PostgreSQL + pgvector with LangChain and the OpenAI API, from the ingestion pipeline through vector search to citation-grounded token streaming.",
+    "Recent focus: Generative AI — designing RAG / LLM retrieval systems on PostgreSQL + pgvector with LangChain and the OpenAI API, from the ingestion pipeline through vector search to citation-grounded token streaming. Two of them are live: multi-tenant document QA, and repository-aware code search that answers with line-level citations. I score retrieval with an evaluation harness rather than trusting the architecture diagram — on the second one that harness disproved my own hybrid-search assumption.",
   ],
   highlights: [
     "End-to-end ownership: system design → testing → deploy → production ops",
@@ -175,7 +175,7 @@ export const about = {
     "Test coverage lifted from 22% to 72% across U.S. & Australian markets",
     "Led a 6-engineer team across 12+ releases, serving 50+ enterprise clients",
     "40+ reusable components architected, cutting feature-development time ~35%",
-    "Gen AI: multi-tenant RAG on PostgreSQL + pgvector, built end-to-end",
+    "Gen AI: RAG on PostgreSQL + pgvector — retrieval measured, not assumed",
     "Jira Cloud analytics platform built and adopted for leadership reporting",
   ],
   /** Right-hand "at a glance" card — the scannable version for a recruiter. */
@@ -280,6 +280,82 @@ export const experience: Role[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    name: "Code Docs Assistant",
+    kind: "featured",
+    tagline: "Live · hybrid retrieval · line-level citations",
+    description:
+      "Point it at any GitHub repository and ask questions about the code. Ingestion chunks source " +
+      "on declaration boundaries across ~30 languages and precomputes a repo map — dependency " +
+      "manifests, entry points, HTTP routes — that rides in every prompt. Retrieval runs pgvector " +
+      "HNSW dense search alongside Postgres full-text and fuses the two with Reciprocal Rank " +
+      "Fusion. Answers come back cited to a file and a line range. An evaluation harness scores " +
+      "every retrieval mode, which is how I found out the hybrid path was the worse one.",
+    role: "Full-stack — ingestion, chunking, retrieval & evaluation harness",
+    notes: [
+      {
+        label: "Chunk on declarations, not line counts",
+        detail:
+          "A fixed-window chunker cuts a function in half, and half a function retrieves as noise and answers as a hallucination. Chunking follows declaration boundaries across ~30 languages, so the unit that gets embedded is the unit a reader would have quoted anyway.",
+      },
+      {
+        label: "A repo map in every prompt",
+        detail:
+          "Dependency manifests, entry points and HTTP routes, precomputed once at ingestion and injected into every prompt. Retrieval finds the chunk that matches the question; the map is what tells the model where that chunk sits in the project — which service owns it, what route reaches it. Largest single retrieval-quality gain in the project, and it never touched the retriever.",
+      },
+      {
+        label: "The harness that killed hybrid search",
+        detail:
+          "Dense pgvector HNSW fused with Postgres full-text via Reciprocal Rank Fusion is the standard answer, and I assumed it here too. An evaluation harness scoring Recall@k and MRR per mode disagreed: dense alone reached 94.4% recall@3 and 0.861 MRR against hybrid's 83.3% and 0.769. The harness is the reason the default isn't hybrid.",
+      },
+      {
+        label: "Aggregates hide bugs",
+        detail:
+          "Recall@k and MRR are averages, and a healthy-looking average is also what two broken cases cancelling each other out looks like. Reading the harness query by query rather than mode by mode surfaced two retrieval bugs the summary numbers were never going to move enough to show.",
+      },
+      {
+        label: "Citations point at lines, not files",
+        detail:
+          "A file-level citation on a 900-line file is just an instruction to go read it yourself. Chunks carry their line span from ingestion through retrieval into the rendered answer, so every claim can be checked in the exact place it came from.",
+      },
+      {
+        label: "45s → 27s, at no quality cost",
+        detail:
+          "Serverless ingestion has a wall clock, and most of it was spent shipping bytes: inserts batched instead of issued per chunk, embedding calls made concurrently rather than in sequence, and vector literals written at float4 precision instead of full float8 text. Re-scored on the harness afterwards at zero retrieval-quality loss — an ingestion speedup that quietly degrades recall is not a speedup.",
+      },
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "PostgreSQL",
+      "pgvector",
+      "Postgres FTS",
+      "OpenAI",
+    ],
+    links: [
+      {
+        label: "Live demo",
+        href: "https://code-docs-assistant.vercel.app/",
+        primary: true,
+      },
+      {
+        label: "Source",
+        href: "https://github.com/AbhishekSatyam96/code-docs-assistant",
+      },
+    ],
+    pipeline: {
+      title: "indexing & retrieval",
+      steps: [
+        { label: "Repository", tech: "any GitHub URL" },
+        { label: "Chunk", tech: "~30 languages" },
+        { label: "Repo map", tech: "routes · entry points" },
+        { label: "Index", tech: "pgvector + FTS" },
+        { label: "Retrieve", tech: "dense · RRF fusion" },
+        { label: "Cited answer", tech: "file · line range" },
+      ],
+    },
+  },
   {
     name: "RAG Knowledge Assistant",
     kind: "featured",
@@ -575,6 +651,7 @@ export const skills: SkillGroup[] = [
       "Mongoose",
       "Schema Design",
       "Indexing",
+      "Full-Text Search",
       "Query Optimization",
     ],
   },
@@ -595,8 +672,10 @@ export const skills: SkillGroup[] = [
       "OpenAI API",
       "Embeddings",
       "Vector Search (HNSW, IVFFlat)",
+      "Hybrid Search (Reciprocal Rank Fusion)",
       "Chunking Strategies",
       "Context Retrieval",
+      "Retrieval Evaluation (Recall@k, MRR)",
       "Prompt Engineering",
       "Token Streaming",
       "Citation Grounding",

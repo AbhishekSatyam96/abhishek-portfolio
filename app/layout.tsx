@@ -68,6 +68,8 @@ export const metadata: Metadata = {
     "RAG",
     "LangChain",
     "pgvector",
+    "Vector Search",
+    "Hybrid Search",
     "Post-quantum cryptography",
     "Key Management",
     "Bengaluru",
