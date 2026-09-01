@@ -336,7 +336,7 @@ export const projects: Project[] = [
     links: [
       {
         label: "Live demo",
-        href: "https://code-docs-assistant.vercel.app/",
+        href: "https://codedocs.abhisheksatyam.com",
         primary: true,
       },
       {
