@@ -69,6 +69,7 @@ export function Contact() {
                 <GithubIcon className="h-4 w-4" />
                 GitHub
               </a>
+              {/*
               <a
                 href={site.resumeUrl}
                 target="_blank"
@@ -77,6 +78,7 @@ export function Contact() {
               >
                 Resume
               </a>
+              */}
             </div>
           </div>
         </div>

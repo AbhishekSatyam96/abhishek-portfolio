@@ -105,9 +105,6 @@ export default function OgImage() {
             }}
           >
             <div style={{ display: "flex" }}>{site.location}</div>
-            <div style={{ display: "flex", marginTop: 4, color: "#22D3EE" }}>
-              Available immediately
-            </div>
           </div>
         </div>
       </div>

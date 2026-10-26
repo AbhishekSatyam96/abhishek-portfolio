@@ -115,6 +115,7 @@ export function Nav() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
+          {/*
           <a
             href={site.resumeUrl}
             target="_blank"
@@ -123,6 +124,7 @@ export function Nav() {
           >
             Resume
           </a>
+          */}
           <a
             href="#contact"
             className="rounded-lg bg-gradient-to-r from-primary to-accent px-3.5 py-2 text-sm font-medium text-bg transition-shadow hover:shadow-[0_0_24px_-4px_rgba(124,140,255,0.7)]"
@@ -180,7 +182,8 @@ export function Nav() {
               </a>
             </li>
           ))}
-          <li className="mt-1 flex gap-2 px-1 pt-2">
+          <li className="mt-1 flex px-1 pt-2">
+            {/*
             <a
               href={site.resumeUrl}
               target="_blank"
@@ -190,10 +193,11 @@ export function Nav() {
             >
               Resume
             </a>
+            */}
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="flex-1 rounded-lg bg-gradient-to-r from-primary to-accent px-4 py-2.5 text-center text-sm font-medium text-bg"
+              className="w-full rounded-lg bg-gradient-to-r from-primary to-accent px-4 py-2.5 text-center text-sm font-medium text-bg"
             >
               Contact
             </a>

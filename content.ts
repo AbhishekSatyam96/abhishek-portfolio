@@ -63,7 +63,7 @@ export type Project = {
 const CAREER_START = Date.UTC(2019, 6, 1); // July 2019
 const MS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
 
-export const yearsExperience = Math.floor(
+export const yearsExperience = Math.ceil(
   (Date.now() - CAREER_START) / MS_PER_YEAR,
 );
 
@@ -81,16 +81,10 @@ const yearsWord = YEAR_WORDS[yearsExperience] ?? String(yearsExperience);
 export const site = {
   name: "Abhishek Satyam",
   role: "Senior Software Engineer",
-  positioning: "Full-Stack (Frontend-Heavy)",
+  positioning: "End-to-End Software Engineer",
   location: "Bengaluru, India",
-  availability: "Open to Senior / Lead roles",
-  /**
-   * Rendered beside `availability` in the hero pill, the About glance card and
-   * the OG image. Notice period and relocation are the two things an India-market
-   * recruiter screens for on the first call — stating them up front removes that
-   * call rather than costing one, and filters out the roles that can't wait.
-   */
-  // availabilityDetail: "Available immediately · open to relocation",
+  availability: "Walmart Global Tech · Supply Chain",
+  /** Current employer and domain; avoid implying active job-search availability. */
   email: "abhishek.satyam96@gmail.com",
   phone: "+91 9915121582",
   // Live links
@@ -110,13 +104,13 @@ export const site = {
    * almost nobody searches "Abhishek Satyam" cold — they search the role, the
    * framework and the location, and this is the one string Google weights most.
    */
-  seoTitle: `Abhishek Satyam — Senior Software Engineer · React, Next.js & TypeScript · Bengaluru`,
+  seoTitle: `Abhishek Satyam — Senior Software Engineer · Web, Mobile, Backend & AI · Bengaluru`,
   /**
    * Front-loaded on purpose: Google truncates around 160 characters, so the
    * role, the stack, the years and the city all land before the cut. The tail
    * still earns its place in the OG/Twitter cards, which don't truncate.
    */
-  description: `Abhishek Satyam — Senior Software Engineer, full-stack with a frontend focus, in Bengaluru, India. ${yearsExperience} years building React, Next.js, TypeScript and Node.js products end-to-end: led a 6-engineer team, launched 3 production products from scratch, shipped to 50+ enterprise clients, improved Core Web Vitals up to 50%. Currently at QNu Labs; also building RAG / LLM retrieval systems on PostgreSQL + pgvector — multi-tenant document QA and repository-aware code search, measured with a Recall@k / MRR evaluation harness. Open to Senior / Lead roles — available immediately, open to relocation.`,
+  description: `Abhishek Satyam — Senior Software Engineer at Walmart Global Tech in Bengaluru, India. ${yearsExperience} years building production software across web, mobile, backend APIs, data, cloud, and AI. Currently working in Supply Chain on migrating Kotlin applications to React Native. Previously led a 6-engineer team, launched 3 production products, served 50+ enterprise clients, and improved Core Web Vitals by up to 50%. Builds RAG / LLM retrieval systems with PostgreSQL + pgvector, including multi-tenant document QA and repository-aware code search evaluated with Recall@k and MRR.`,
 };
 
 export const nav: NavLink[] = [
@@ -128,20 +122,14 @@ export const nav: NavLink[] = [
 ];
 
 export const hero = {
-  /**
-   * Leads with the stack, not the domain. Post-quantum cryptography is a strong
-   * credential but a narrow headline — a recruiter staffing a senior React role
-   * reads a crypto-first eyebrow as "specialist, wrong fit" and moves on. The
-   * domain still lands three lines down, where it reads as proof instead of a
-   * filter.
-   */
+  /** Lead with end-to-end engineering breadth rather than one discipline. */
   eyebrow:
-    "// senior software engineer · react · next.js · typescript · node.js · gen ai",
-  roleLine: "Senior Software Engineer · Full-Stack (Frontend-Heavy)",
+    "// senior software engineer · web · mobile · backend · cloud · gen ai",
+  roleLine: "Senior Software Engineer · End-to-End Product Engineering",
   // Oversized gradient statement under the name.
-  statement: ["Building software that scales from", "pixels to production."],
+  statement: ["Building across the stack,", "from idea to production."],
   // Short, scannable intro for the hero.
-  intro: `Frontend-heavy full-stack engineer with ${yearsExperience} years shipping scalable, high-performance web apps end-to-end — React, Next.js, TypeScript, Node.js. I've led a 6-engineer team and owned delivery for products serving 50+ enterprise clients. Currently at QNu Labs, where I've built and launched 3 production products for post-quantum cryptography and quantum-safe key management.`,
+  intro: `Software engineer with ${yearsExperience} years building and shipping production software across web, mobile, backend services, data, cloud infrastructure, and AI. Currently at Walmart Global Tech, working in Supply Chain on migrating Kotlin applications to React Native implementation of a JSON-driven Server-Driven UI (SDUI) architecture. Previously led a 6-engineer team and delivered enterprise products end-to-end, from architecture and APIs through testing, deployment, and production operations.`,
   primaryCta: { label: "View work", href: "#projects" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   /**
@@ -154,7 +142,7 @@ export const hero = {
    * screening the page in fifteen seconds.
    */
   stats: [
-    { value: `${yearsExperience} yrs`, label: "shipping production web apps" },
+    { value: `${yearsExperience} yrs`, label: "shipping production software" },
     { value: "6", label: "engineers led" },
     { value: "up to 50%", label: "Core Web Vitals improvement" },
   ],
@@ -162,13 +150,15 @@ export const hero = {
 
 export const about = {
   eyebrow: "// about",
-  title: "Frontend-deep, full-stack wide.",
+  title: "End-to-end engineering, across the stack.",
   paragraphs: [
-    `Full-stack engineer with a frontend-heavy focus and ${yearsExperience} years building and scaling production web applications across frontend architecture, backend and API integration, databases, and cloud deployments. Strongest across the frontend — React, Next.js, and TypeScript — with full ownership of the delivery pipeline (Docker, GitLab CI/CD, GCP) and backend development in Node.js, Express, and PostgreSQL.`,
-    "I own the complete software development lifecycle from system design and implementation through testing, deployment, and production operations. Track record of building enterprise products from scratch, leading engineering teams, improving Core Web Vitals by up to 50%, and lifting test coverage from 22% to 72% for U.S. and Australian markets.",
+    `Software engineer with ${yearsExperience} years building and scaling production systems across web, mobile, backend services, data, cloud delivery, and AI. I bring deep experience in React, Next.js, TypeScript, and frontend architecture, alongside hands-on work with Node.js, Express, REST/GraphQL APIs, PostgreSQL, CI/CD, Docker, and GCP. At Walmart Global Tech, I work in Supply Chain on migrating Kotlin applications to React Native, extending that experience into mobile platform modernization.`,
+    "I take ownership across the software development lifecycle—from system design and implementation through testing, deployment, and production operations. My track record includes building enterprise products from scratch, leading engineering teams, improving Core Web Vitals by up to 50%, and raising test coverage from 22% to 72% across products serving U.S. and Australian markets.",
     "Recent focus: Generative AI — designing RAG / LLM retrieval systems on PostgreSQL + pgvector with LangChain and the OpenAI API, from the ingestion pipeline through vector search to citation-grounded token streaming. Two of them are live: multi-tenant document QA, and repository-aware code search that answers with line-level citations. I score retrieval with an evaluation harness rather than trusting the architecture diagram — on the second one that harness disproved my own hybrid-search assumption.",
   ],
   highlights: [
+    "Current: Supply Chain mobile app modernization at Walmart Global Tech",
+    "Engineering breadth across web, mobile, backend, data, cloud, and AI",
     "End-to-end ownership: system design → testing → deploy → production ops",
     "3 production web products launched from the ground up at QNu Labs",
     "Core Web Vitals improved by up to 50%; Lighthouse held at 90+",
@@ -180,7 +170,7 @@ export const about = {
   ],
   /** Right-hand "at a glance" card — the scannable version for a recruiter. */
   glance: {
-    openTo: "Senior / Lead — frontend & full-stack, at product companies",
+    openTo: "Senior / Lead roles across web, mobile, backend & AI",
     // availability: site.availabilityDetail,
   },
 };
@@ -196,17 +186,34 @@ export const experienceSection = {
 
 export const experience: Role[] = [
   {
+  company: "Walmart Global Tech",
+  title: "Senior Software Engineer",
+  period: "September 2026 – Present", 
+  context:
+    "Supply Chain · JSON-driven SDUI · Bengaluru",
+  current: true,
+  bullets: [
+    "Contributing to the migration of Kotlin-based Supply Chain applications to a React Native implementation of a JSON-driven Server-Driven UI (SDUI) architecture as part of mobile platform modernization.",
+  ],
+  tags: [
+    "React Native",
+    "Server-Driven UI (SDUI)",
+    "JSON-Driven UI",
+    "Kotlin Migration",
+    "Supply Chain",
+  ],
+},
+  {
     company: "QNu Labs",
     title: "Senior Software Engineer",
-    period: "March 2025 – Present",
+    period: "March 2025 – August 2026",
     context: "Post-quantum cryptography & key management · Bengaluru",
-    current: true,
     bullets: [
       "Built and launched 3 production web products from the ground up — QVault, QKMS, and an engineering analytics platform — owning application architecture, repository setup, tooling, API integration, testing, and deployment within a 6-engineer product team.",
       "Designed and delivered QKMS, an enterprise key-management platform supporting multi-role authentication, key-profile management, and secure operational workflows for cryptographic key administration.",
       "Designed the API integration architecture for enterprise workflows — defining data contracts, handling asynchronous operations and failure states, and integrating backend services across authentication, key management, and reporting.",
       "Built an engineering analytics platform on the Jira Cloud REST APIs, designing JQL-based data retrieval, pagination handling, changelog aggregation, data transformation, and reporting pipelines to surface team activity and delivery-throughput metrics; adopted for leadership reporting.",
-      "Own Dockerized GitLab CI/CD pipelines and GCP deployments, standardizing build, test, release, and production deployment workflows across all 3 products.",
+      "Owned Dockerized GitLab CI/CD pipelines and GCP deployments, standardizing build, test, release, and production deployment workflows across all 3 products.",
       "Established unit-testing and code-review standards, reaching 75%+ coverage with Jest and React Testing Library and integrating automated regression testing into CI.",
       "Improved application performance and reliability through Core Web Vitals optimization — LCP reduced from 3.8s to 1.9s, CLS held below 0.1, and 90+ Lighthouse performance sustained, with releases monitored in production via Sentry.",
     ],
@@ -531,6 +538,7 @@ export const projects: Project[] = [
 /** Headline technologies shown in the Skills marquee strip. */
 export const coreStack = [
   "React",
+  "React Native",
   "Next.js",
   "TypeScript",
   "Node.js",
@@ -558,7 +566,7 @@ export const coreStack = [
  */
 export const skillDomains: { label: string; groups: string[] }[] = [
   {
-    label: "Frontend",
+    label: "Web & Mobile Engineering",
     groups: [
       "Languages",
       "Frameworks & Libraries",
@@ -742,13 +750,7 @@ export const achievements = [
 export const contact = {
   eyebrow: "// contact",
   title: "Let's build something worth trusting.",
-  /**
-   * States the two things that otherwise cost a screening call — notice period
-   * and relocation — and ends on a reply commitment. The commitment is the line
-   * that actually converts a browsing recruiter into a message, so it only works
-   * if it stays true; drop the last sentence rather than let it go stale.
-   */
-  body: "Open to Senior / Lead frontend and full-stack roles at product companies — available immediately, and open to relocation. Email or call directly; I reply within a day.",
+  body: "I enjoy solving engineering problems across the stack—from web and mobile experiences to APIs, data, cloud infrastructure, and AI. Reach out to connect about engineering, architecture, or collaboration.",
   email: site.email,
   phone: site.phone,
 };

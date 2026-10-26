@@ -56,9 +56,9 @@ export function About() {
                   Currently
                 </dt>
                 <dd className="mt-1 text-fg">
-                  Senior Software Engineer, QNu Labs
+                  Senior Software Engineer, Walmart Global Tech
                   <span className="block text-muted">
-                    Post-quantum cryptography &amp; key management ·{" "}
+                    Supply Chain ·{" "}
                     {site.location}
                   </span>
                 </dd>
@@ -113,10 +113,10 @@ export function About() {
               </div>
             </dl>
 
-            {/* Pinned to the card's bottom: the three things a recruiter clicks. */}
+            {/* Pinned to the card's bottom: the places to find more work. */}
             <div className="mt-auto flex flex-wrap gap-2 pt-8">
               {[
-                { label: "Resume", href: site.resumeUrl },
+                // { label: "Resume", href: site.resumeUrl },
                 { label: "LinkedIn", href: site.linkedin },
                 { label: "GitHub", href: site.github },
               ].map((l) => (
